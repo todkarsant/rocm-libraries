@@ -3,6 +3,7 @@
 
 """Regression checks for TensileLite's distributable package metadata."""
 
+import configparser
 import re
 import subprocess
 import sys
@@ -43,6 +44,9 @@ def test_wheel_metadata_does_not_require_unpublished_rocisa(tmp_path, monkeypatc
         metadata = archive.read(
             next(name for name in archive.namelist() if name.endswith(".dist-info/METADATA"))
         ).decode("utf-8")
+        entry_points = archive.read(
+            next(name for name in archive.namelist() if name.endswith(".dist-info/entry_points.txt"))
+        ).decode("utf-8")
 
     component_version = re.search(
         r'^__version__ = "([^"]+)"$',
@@ -51,6 +55,19 @@ def test_wheel_metadata_does_not_require_unpublished_rocisa(tmp_path, monkeypatc
     ).group(1)
     assert f"Version: {component_version}+rocm7.2.4" in metadata
     assert "Requires-Dist: rocisa" not in metadata
+
+    parsed_entry_points = configparser.ConfigParser()
+    parsed_entry_points.optionxform = str
+    parsed_entry_points.read_string(entry_points)
+    assert dict(parsed_entry_points["console_scripts"]) == {
+        "tensilelite": "tensilelite.cli:main",
+        "Tensile": "tensilelite.run:main",
+        "TensileCreateLibrary": "tensilelite.create_library:main",
+        "TensileVerifyStinkyElfText": "tensilelite.verify_stinky_comment_vs_elf_text:main",
+        "TensileGetPath": "tensilelite:PrintTensileRoot",
+        "TensileBenchmarkCluster": "tensilelite.benchmark_cluster:main",
+        "TensileRetuneLibrary": "tensilelite.retune_library:main",
+    }
 
 
 def test_removed_source_autobuild_option_is_not_referenced():
