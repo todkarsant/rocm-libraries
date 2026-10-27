@@ -259,6 +259,14 @@ public:
         {
             reportBenchmark(*_benchmark);
         }
+        for(auto& result : _referenceBenchmarks)
+        {
+            if(result.status == "pending")
+            {
+                result.status = "error";
+            }
+            reportReferenceBenchmark(result);
+        }
         reportOutcome(outcome);
     }
 
@@ -281,6 +289,11 @@ public:
     const TensorMap& inputs() const
     {
         return _inputs;
+    }
+
+    const std::vector<ReferenceBenchmarkResult>& referenceBenchmarks() const
+    {
+        return _referenceBenchmarks;
     }
 
     /// Mode B/C support observation: which engines take this graph?
@@ -563,6 +576,8 @@ private:
                                               const OutputTensors& engineOutputs,
                                               OutputTensors& refOutputs);
     void markOutputsModified(OutputTensors& outputs) const;
+    void measureReference(double ReferenceBenchmarkResult::*phase,
+                          const std::function<void()>& work);
 
     // Under --benchmark, times the engine on the outputs `outcome` just verified and
     // keeps the result for TestBody() to report. Does nothing for any other outcome.
@@ -625,6 +640,7 @@ private:
     TensorMap _inputs;
     // Set by benchmarkIfVerified(); reported at the end of TestBody().
     std::optional<hipdnn_frontend::AutotuneResult> _benchmark;
+    std::vector<ReferenceBenchmarkResult> _referenceBenchmarks;
 };
 
 } // namespace hipdnn_integration_tests::bundle
