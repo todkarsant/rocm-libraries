@@ -3569,6 +3569,7 @@ namespace
         const rocblaslt_matmul_algo* algo = nullptr)
     try
     {
+        // TensileHost is initialized on the first call
         static TensileHost host;
 
         if(device == -1)
@@ -3643,13 +3644,13 @@ namespace
     }
     catch(const std::exception& e)
     {
-        std::cerr << "\nrocblaslt error: Could not resolve TensileLite execution context:\n"
+        std::cerr << "\nrocblaslt error: Could not initialize Tensile host:\n"
                   << e.what() << std::endl;
         return nullptr;
     }
     catch(...)
     {
-        std::cerr << "\nrocblaslt error: Could not resolve TensileLite execution context:\nUnknown "
+        std::cerr << "\nrocblaslt error: Could not initialize Tensile host:\nUnknown "
                      "exception thrown"
                   << std::endl;
         return nullptr;
@@ -3738,11 +3739,6 @@ struct TensileDataGemm
     int                                        algoIndex = std::numeric_limits<int>::max();
     // Preserve the complete opaque identity for separate initialize/run calls.
     rocblaslt_matmul_algo selectedAlgo{};
-    // TensileLite's logical MX type/block size does not retain the descriptor's physical layout.
-    RocblasltContractionProblem::ScalingFormat scaleAType
-        = RocblasltContractionProblem::ScalingFormat::None;
-    RocblasltContractionProblem::ScalingFormat scaleBType
-        = RocblasltContractionProblem::ScalingFormat::None;
 
     // Built from the RocblasltContractionProblem this object was created from,
     // by the same builder the C API uses, so both APIs look up the same key.
@@ -6543,32 +6539,6 @@ rocblaslt_status runContractionProblem(rocblaslt_handle                   handle
     return status;
 }
 
-namespace
-{
-    // Solution selection depends on the path when alpha is zero: updating a reused
-    // problem keeps K, constructing a new one sets K to zero.
-    void setTensileGemmProblem(RocblasltContractionProblem const& problem,
-                               std::shared_ptr<void>&             gemmData)
-    {
-        if(gemmData)
-        {
-            std::shared_ptr<TensileDataGemm> data = getTensileData(gemmData);
-            updateTensileProblem(problem, data->problem);
-            data->inputs         = GetTensileInputs(problem);
-            data->enableEpilogue = problem.epilogue == ROCBLASLT_EPILOGUE_DEFAULT ? false : true;
-        }
-        else
-        {
-            TensileDataGemm data;
-            data.problem        = ConstructTensileProblem(problem);
-            data.inputs         = GetTensileInputs(problem);
-            data.enableEpilogue = problem.epilogue == ROCBLASLT_EPILOGUE_DEFAULT ? false : true;
-
-            gemmData = std::static_pointer_cast<void>(std::make_shared<TensileDataGemm>(data));
-        }
-    }
-}
-
 rocblaslt_status gemmCreate(RocblasltContractionProblem const& problem,
                             std::shared_ptr<void>&             gemmData,
                             size_t&                            gemmCount)
@@ -6595,23 +6565,39 @@ rocblaslt_status gemmCreate(RocblasltContractionProblem const& problem,
             return rocblaslt_status_invalid_pointer;
         }
         gemmCount = 1;
-#ifdef HIPBLASLT_ENABLE_JIT
-        auto request = std::make_shared<jit::GemmRequest>(problem);
-        setTensileGemmProblem(problem, gemmData);
-        auto data          = std::static_pointer_cast<TensileDataGemm>(gemmData);
-        data->jitRequest   = std::move(request);
-        data->selectedAlgo = {};
-        data->kernels.clear();
-#else
-        setTensileGemmProblem(problem, gemmData);
-        auto data = std::static_pointer_cast<TensileDataGemm>(gemmData);
-#endif
-        data->scaleAType = problem.scaleAType;
-        data->scaleBType = problem.scaleBType;
+
         // Building the key queries the device, and this runs on every gemm
         // object creation, so only when a tuning file will be consulted.
-        if(TensileLite::selectTuningFile().active)
-            data->tuningKey = RocblasltContractionProblem2ProblemOverride(problem);
+        const bool cacheTuningKey = TensileLite::selectTuningFile().active;
+
+        if(gemmData)
+        {
+            std::shared_ptr<TensileDataGemm> data = getTensileData(gemmData);
+            updateTensileProblem(problem, data->problem);
+            data->inputs         = GetTensileInputs(problem);
+            data->enableEpilogue = problem.epilogue == ROCBLASLT_EPILOGUE_DEFAULT ? false : true;
+            if(cacheTuningKey)
+                data->tuningKey = RocblasltContractionProblem2ProblemOverride(problem);
+            // setProblem drops kernels prepared for the previous problem. run then
+            // returns not-initialized until initialize, on a JIT build and without.
+            data->kernels.clear();
+        }
+        else
+        {
+            TensileDataGemm data;
+            data.problem        = ConstructTensileProblem(problem);
+            data.inputs         = GetTensileInputs(problem);
+            data.enableEpilogue = problem.epilogue == ROCBLASLT_EPILOGUE_DEFAULT ? false : true;
+            if(cacheTuningKey)
+                data.tuningKey = RocblasltContractionProblem2ProblemOverride(problem);
+
+            gemmData = std::static_pointer_cast<void>(std::make_shared<TensileDataGemm>(data));
+        }
+#ifdef HIPBLASLT_ENABLE_JIT
+        auto data          = std::static_pointer_cast<TensileDataGemm>(gemmData);
+        data->jitRequest   = std::make_shared<jit::GemmRequest>(problem);
+        data->selectedAlgo = {};
+#endif
 
         status = rocblaslt_status_success;
     }

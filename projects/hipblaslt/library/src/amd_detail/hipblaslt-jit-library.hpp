@@ -13,6 +13,7 @@
 #include <map>
 #include <memory>
 #include <mutex>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -280,6 +281,12 @@ namespace hipblaslt_jit
         bool                                              m_checked = false;
         std::map<std::string, std::unique_ptr<Directory>> m_directories;
         std::map<int, std::vector<Directory*>>            m_routes;
+        // Problems this library already tried to generate. The key is the cache
+        // directory, workspace, requested count, problem type and sizes, so a
+        // different K, datatype or count is still generated. Another root has
+        // its own set.
+        std::mutex            m_attemptMutex;
+        std::set<std::string> m_attempted;
     };
 
 }

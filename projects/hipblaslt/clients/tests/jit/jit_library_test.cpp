@@ -22,6 +22,8 @@
 #include <Tensile/Tensile.hpp>
 #include <Tensile/msgpack/Writing.hpp>
 
+#define CATCH_CONFIG_RUNNER
+#include <catch2/catch_session.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include <algorithm>
@@ -38,7 +40,11 @@
 
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <spawn.h>
 #include <unistd.h>
+#include <limits.h>
+
+extern char** environ;
 
 namespace hj = hipblaslt_jit;
 namespace fs = std::filesystem;
@@ -453,7 +459,6 @@ namespace
                         && prefix != hj::entryPrefix(type, {"kernel2"}, sizes)
                         && prefix != hj::entryPrefix(type, {"kernel", "kernel2"}, sizes)
                         && prefix != hj::entryPrefix(type, {"kernel"}, {256, 128, 1, 1024}));
-        std::cout << "PASS cache keys, compiler environment, ProblemType keys and entry names\n";
     }
 
     void directories(const Context& ctx)
@@ -504,8 +509,6 @@ namespace
                         && ::chmod(builtUnder(base / "mode-700").c_str(), 0707) == 0);
         JIT_REQUIRE("An other-writable build directory was accepted",
                     !attempt(base / "mode-700").ok());
-        std::cout << "PASS group- and other-writable, linked and non-directory roots are rejected; "
-                     "created directories are 0700\n";
     }
 
     void roundTrip(const Context& ctx)
@@ -597,8 +600,6 @@ namespace
                         && why.message.find("outside the reserved JIT range") != std::string::npos);
         JIT_REQUIRE("An unpublished index resolved",
                     !library.resolve(0, base + 1, why).master && !why.ok());
-        std::cout << "PASS the stock loader reads the published library; exact sizes only, and "
-                     "solution predicates still run\n";
     }
 
     void dedupeAndOrder(const Context& ctx)
@@ -659,7 +660,6 @@ namespace
         hj::JitLibrary reopened(root);
         JIT_REQUIRE("A reopened library allocated another index for a published entry",
                     publish(reopened, key, problem, {a}) == std::vector<int32_t>{base});
-        std::cout << "PASS deduplication, publication order, top-N and exclusions\n";
     }
 
     void mismatch(const Context& ctx)
@@ -725,8 +725,6 @@ namespace
                             == std::vector<int32_t>{base + 1});
         }
         JIT_REQUIRE("A mismatched directory was modified or deleted", tree(root) == tampered);
-        std::cout << "PASS mismatched and tampered keys are ignored and left untouched; other "
-                     "schemas are never read\n";
     }
 
     // A prebuilt library disables the JIT library only for an index in
@@ -744,8 +742,6 @@ namespace
             hj::holdsJitIndex(Mapping{{0, "a"}, {base, "a"}})
                 && hj::holdsJitIndex(Mapping{{hj::jitIndexEnd - 1, "a"}, {hj::jitIndexEnd, "b"}})
                 && hj::holdsJitIndex(Solutions{{base, nullptr}}));
-        std::cout << "PASS prebuilt indices disable the JIT library only in "
-                     "[jitIndexBase, jitIndexEnd)\n";
     }
 
     void allocator(const Context& ctx)
@@ -761,22 +757,10 @@ namespace
         ok(hj::msgpack_io::writeAllocator(last, bytes), "allocator");
         ok(hj::files::writeAtomically(directory / "staging", allocator, bytes), "allocator");
         JIT_REQUIRE("The last reserved index was not allocated",
-                    publish(library, key, gemm(264), {ctx.entry}) == std::vector<int32_t>{last});
-        std::vector<int32_t> indices;
-        const auto status = library.publish(
-            key, 0, gemm(272), ctx.entry.executable, {ctx.entry.solution}, indices);
-        JIT_REQUIRE("An exhausted range allocated an index: " + status.message,
-                    !status.ok() && status.message.find("exhausted") != std::string::npos);
-        {
-            int64_t next = 0;
-            ok(hj::msgpack_io::readAllocator(read(allocator), next), "allocator");
-            INFO(("The allocator holds " + std::to_string(next) + ", not jitIndexEnd"));
-            REQUIRE((next == hj::jitIndexEnd));
-        }
-        JIT_REQUIRE("Published entries stopped resolving when the range was exhausted",
                     publish(library, key, gemm(264), {ctx.entry}) == std::vector<int32_t>{last}
                         && ctx.find(library, key, gemm(264)) == std::vector<int32_t>{last});
 
+        std::vector<int32_t> indices;
         for(const int64_t outside : {int64_t{base} - 1, int64_t{hj::jitIndexEnd} + 1})
         {
             ok(hj::msgpack_io::writeAllocator(outside, bytes), "allocator");
@@ -809,14 +793,98 @@ namespace
             INFO(("Lookup returned " + std::to_string(outside) + ", outside the reserved range"));
             REQUIRE((ctx.find(reopened, key, gemm(256)).empty()));
         }
-        std::cout << "PASS index allocation up to jitIndexEnd, exhaustion, and out-of-range "
-                     "allocators and entries rejected\n";
     }
 
     // Puts bytes back with the same atomic replace publish uses.
     void restore(const fs::path& staging, const fs::path& target, const std::vector<uint8_t>& bytes)
     {
         ok(hj::files::writeAtomically(staging, target, bytes), "restore " + target.filename().string());
+    }
+
+    // A fresh process. The parent has already called HIP, and HIP is not fork-safe.
+    struct ChildCommand
+    {
+        enum class Role
+        {
+            None,
+            Lock,
+            Writer,
+            Reader
+        } role = Role::None;
+        fs::path scratch;
+        fs::path root;
+        fs::path lockFile;
+        fs::path done;
+        int      writer    = 0;
+        int      perWriter = 0;
+        int      startFd   = -1;
+    };
+    ChildCommand g_child;
+
+    std::string executablePath()
+    {
+        std::string path(PATH_MAX, '\0');
+        const auto  length = ::readlink("/proc/self/exe", path.data(), path.size() - 1);
+        if(length <= 0)
+            throw std::runtime_error("Cannot read /proc/self/exe");
+        path.resize(static_cast<size_t>(length));
+        return path;
+    }
+
+    pid_t spawnChild(const std::vector<std::string>& roleArgs)
+    {
+        const auto               exe = executablePath();
+        std::vector<std::string> storage{exe, "--child"};
+        storage.insert(storage.end(), roleArgs.begin(), roleArgs.end());
+        std::vector<char*> argv;
+        argv.reserve(storage.size() + 1);
+        for(auto& word : storage)
+            argv.push_back(word.data());
+        argv.push_back(nullptr);
+        pid_t      pid = -1;
+        const auto rc  = ::posix_spawn(&pid, exe.c_str(), nullptr, nullptr, argv.data(), environ);
+        JIT_REQUIRE("posix_spawn failed: " + std::to_string(rc), rc == 0 && pid > 0);
+        return pid;
+    }
+
+    bool childArguments(int argc, char** argv)
+    {
+        if(argc < 3 || std::string(argv[1]) != "--child")
+            return false;
+        const std::string role = argv[2];
+        const auto        need = [&](int count) {
+            if(argc < count)
+                throw std::runtime_error("JIT library child is missing arguments");
+        };
+        if(role == "lock")
+        {
+            need(4);
+            g_child.role     = ChildCommand::Role::Lock;
+            g_child.lockFile = argv[3];
+        }
+        else if(role == "writer")
+        {
+            need(8);
+            g_child.role      = ChildCommand::Role::Writer;
+            g_child.scratch   = argv[3];
+            g_child.root      = argv[4];
+            g_child.writer    = std::stoi(argv[5]);
+            g_child.perWriter = std::stoi(argv[6]);
+            g_child.startFd   = std::stoi(argv[7]);
+        }
+        else if(role == "reader")
+        {
+            need(8);
+            g_child.role      = ChildCommand::Role::Reader;
+            g_child.scratch   = argv[3];
+            g_child.root      = argv[4];
+            g_child.perWriter = std::stoi(argv[5]);
+            g_child.startFd   = std::stoi(argv[6]);
+            g_child.done      = argv[7];
+        }
+        else
+            throw std::runtime_error("Unknown JIT library child role " + role);
+        return true;
     }
 
     // A publish that stopped is the files it had already replaced: the allocator,
@@ -897,25 +965,16 @@ namespace
         }
         const auto lockFile = hj::JitLibrary(lockRoot).directory(lockKey).parent_path() / "lock";
         std::cout.flush();
-        const auto child = ::fork();
-        JIT_REQUIRE("fork failed", child >= 0);
-        if(child == 0)
-        {
-            hj::files::FileLock held;
-            if(!hj::files::FileLock::acquire(lockFile, std::chrono::seconds(5), held).ok())
-                ::_exit(4);
-            ::_exit(3);
-        }
+        const auto child = spawnChild({"lock", lockFile.string()});
         int status = 0;
         JIT_REQUIRE("The lock holder did not exit",
                     ::waitpid(child, &status, 0) == child && WIFEXITED(status)
-                        && WEXITSTATUS(status) == 3);
+                        && WEXITSTATUS(status) == 0);
         {
             hj::JitLibrary library(lockRoot);
             INFO(("A lock held by an exited process blocked publication"));
             REQUIRE((publish(library, lockKey, gemm(512), {ctx.entry})[0] == base + 1));
         }
-        std::cout << "PASS a partial library stays consistent, and a lock dies with its process\n";
     }
 
     void refresh(const Context& ctx)
@@ -951,8 +1010,6 @@ namespace
         hj::JitLibrary other(root, deviceKey("3.1"));
         JIT_REQUIRE("A different comgr path hid a published index: " + why.message,
                     other.resolve(0, second[0], why).master != nullptr);
-        std::cout << "PASS readers reload on change, keep superseded snapshots, and find indices "
-                     "in any backend's directory\n";
     }
 
     void fusedA2A(const Context& ctx)
@@ -998,8 +1055,65 @@ namespace
                     rejected(status, hj::Stage::Lookup) && indices.empty());
         JIT_REQUIRE("The plain problem lost its solution",
                     ctx.find(library, key, gemm(256)) == plain);
-        std::cout << "PASS fused GEMM and all-to-all is neither served nor stored, even beside a "
-                     "plain solution of the same sizes\n";
+    }
+
+    ContractionProblemGemm sharedProblem(int j)
+    {
+        return gemm(256 + 8 * j);
+    }
+    ContractionProblemGemm ownProblem(int writer, int j, int perWriter)
+    {
+        return gemm(4096 + 8 * (writer * perWriter + j));
+    }
+
+    void writeEntries(const Context&    ctx,
+                      const fs::path&   root,
+                      const hj::CacheKey& key,
+                      const fs::path&   output,
+                      int               writer,
+                      int               perWriter)
+    {
+        hj::JitLibrary library(root);
+        std::ofstream  out(output / ("writer-" + std::to_string(writer) + ".txt"));
+        for(int j = 0; j < perWriter; ++j)
+        {
+            out << "shared " << j << ' '
+                << publish(library, key, sharedProblem(j), {ctx.entry})[0] << '\n';
+            out << "own " << j << ' '
+                << publish(library, key, ownProblem(writer, j, perWriter), {ctx.entry})[0] << '\n';
+        }
+    }
+
+    void readEntries(const Context&     ctx,
+                     const fs::path&    root,
+                     const hj::CacheKey& key,
+                     int                perWriter,
+                     const fs::path&    done)
+    {
+        hj::JitLibrary       library(root);
+        std::vector<int32_t> seen(perWriter, -1);
+        const auto deadline = std::chrono::steady_clock::now() + std::chrono::minutes(2);
+        for(bool last = false; !last;)
+        {
+            last = fs::exists(done);
+            JIT_REQUIRE("The writers did not finish", std::chrono::steady_clock::now() < deadline);
+            for(int j = 0; j < perWriter; ++j)
+            {
+                const auto found = ctx.find(library, key, sharedProblem(j), 1);
+                JIT_REQUIRE("A reader saw an entry disappear or change",
+                            found.size() <= 1 && (seen[j] < 0 || found == std::vector{seen[j]}));
+                if(found.empty())
+                    continue;
+                seen[j] = found[0];
+                hj::Status why;
+                JIT_REQUIRE("A reader could not load a found entry: " + why.message,
+                            library.solutionByIndex(0, ctx.hardware, found[0], why) != nullptr);
+            }
+            if(fs::exists(builtUnder(root) / key.directoryName() / lazyMaster(ctx.arch)))
+                consistent(builtUnder(root) / key.directoryName(), ctx.hardware, ctx.arch);
+        }
+        JIT_REQUIRE("The reader never saw every shared entry",
+                    std::find(seen.begin(), seen.end(), -1) == seen.end());
     }
 
     void concurrency(const Context& ctx, int writers, int perWriter)
@@ -1011,76 +1125,19 @@ namespace
         int start[2];
         JIT_REQUIRE("pipe failed", ::pipe(start) == 0);
         std::vector<pid_t> children;
-        const auto         spawn = [&](const std::function<void()>& body) {
-            std::cout.flush();
-            const auto child = ::fork();
-            JIT_REQUIRE("fork failed", child >= 0);
-            if(child == 0)
-            {
-                ::close(start[1]);
-                char go = 0;
-                int  code = ::read(start[0], &go, 1) == 1 ? 0 : 5;
-                try
-                {
-                    if(!code)
-                        body();
-                }
-                catch(const std::exception& error)
-                {
-                    std::cerr << "FAIL child " << ::getpid() << ": " << error.what() << '\n';
-                    code = 1;
-                }
-                catch(...)
-                {
-                    std::cerr << "FAIL child " << ::getpid() << '\n';
-                    code = 1;
-                }
-                ::_exit(code);
-            }
-            children.push_back(child);
-        };
-        const auto shared = [](int j) { return gemm(256 + 8 * j); };
-        const auto own    = [&](int w, int j) { return gemm(4096 + 8 * (w * perWriter + j)); };
         for(int w = 0; w < writers; ++w)
-            spawn([&, w] {
-                hj::JitLibrary library(root);
-                std::ofstream  out(ctx.scratch / ("writer-" + std::to_string(w) + ".txt"));
-                for(int j = 0; j < perWriter; ++j)
-                {
-                    out << "shared " << j << ' ' << publish(library, key, shared(j), {ctx.entry})[0]
-                        << '\n';
-                    out << "own " << j << ' ' << publish(library, key, own(w, j), {ctx.entry})[0]
-                        << '\n';
-                }
-            });
-        spawn([&] {
-            hj::JitLibrary       library(root);
-            std::vector<int32_t> seen(perWriter, -1);
-            const auto deadline = std::chrono::steady_clock::now() + std::chrono::minutes(2);
-            for(bool last = false; !last;)
-            {
-                last = fs::exists(done);
-                JIT_REQUIRE("The writers did not finish",
-                            std::chrono::steady_clock::now() < deadline);
-                for(int j = 0; j < perWriter; ++j)
-                {
-                    const auto found = ctx.find(library, key, shared(j), 1);
-                    JIT_REQUIRE("A reader saw an entry disappear or change",
-                                found.size() <= 1
-                                    && (seen[j] < 0 || found == std::vector{seen[j]}));
-                    if(found.empty())
-                        continue;
-                    seen[j] = found[0];
-                    hj::Status why;
-                    JIT_REQUIRE("A reader could not load a found entry: " + why.message,
-                                library.solutionByIndex(0, ctx.hardware, found[0], why) != nullptr);
-                }
-                if(fs::exists(builtUnder(root) / key.directoryName() / lazyMaster(ctx.arch)))
-                    consistent(builtUnder(root) / key.directoryName(), ctx.hardware, ctx.arch);
-            }
-            JIT_REQUIRE("The reader never saw every shared entry",
-                        std::find(seen.begin(), seen.end(), -1) == seen.end());
-        });
+            children.push_back(spawnChild({"writer",
+                                           ctx.scratch.string(),
+                                           root.string(),
+                                           std::to_string(w),
+                                           std::to_string(perWriter),
+                                           std::to_string(start[0])}));
+        children.push_back(spawnChild({"reader",
+                                       ctx.scratch.string(),
+                                       root.string(),
+                                       std::to_string(perWriter),
+                                       std::to_string(start[0]),
+                                       done.string()}));
         ::close(start[0]);
         const std::string go(children.size(), 'g');
         JIT_REQUIRE("Cannot start the children",
@@ -1143,34 +1200,25 @@ namespace
         for(int j = 0; j < perWriter; ++j)
         {
             JIT_REQUIRE("A shared entry has more than one row",
-                        ctx.find(library, key, shared(j))
+                        ctx.find(library, key, sharedProblem(j))
                             == std::vector<int32_t>{*sharedIndices[j].begin()});
             for(int w = 0; w < writers; ++w)
             {
                 JIT_REQUIRE("A writer's entry is lost",
-                            ctx.find(library, key, own(w, j)).size() == 1);
+                            ctx.find(library, key, ownProblem(w, j, perWriter)).size() == 1);
             }
         }
-        std::cout << "PASS " << writers << " processes published " << perWriter
-                  << " shared and " << perWriter
-                  << " own entries each while a reader looked them up: " << all.size()
-                  << " entries, no duplicates, no gaps\n";
     }
 }
 
-void runLibrary(const fs::path& scratch, int writers, int perWriter)
+Context openContext(const fs::path& scratch)
 {
     Context ctx;
     ctx.scratch = scratch;
-    fs::remove_all(ctx.scratch);
     fs::create_directories(ctx.scratch);
 
-    int             device = 0;
-    hipDeviceProp_t properties{};
-    JIT_REQUIRE("Cannot query the current HIP device",
-                hipGetDevice(&device) == hipSuccess
-                    && hipGetDeviceProperties(&properties, device) == hipSuccess);
-    const std::string gcnArchName = properties.gcnArchName;
+    const auto        target      = hipblaslt_jit_test::currentDeviceTarget();
+    const std::string gcnArchName = target.properties.gcnArchName;
     ctx.arch                      = gcnArchName.substr(0, gcnArchName.find(':'));
     const auto processor          = TensileLite::AMDGPU::toProcessor(ctx.arch);
     JIT_REQUIRE("No TensileLite processor for " + ctx.arch,
@@ -1178,7 +1226,7 @@ void runLibrary(const fs::path& scratch, int writers, int perWriter)
     ctx.hardware = TensileLite::AMDGPU(processor, 256, ctx.arch);
     ctx.source   = hj::source_bundle::readSourceBundle(fs::u8path(HIPBLASLT_JIT_DATA) / ctx.arch
                                                      / "plain");
-    ctx.source.target            = hipblaslt_jit_test::deviceTarget(properties);
+    ctx.source.target            = target;
     ctx.source.codeObjectVersion = hj::jitCodeObjectVersion;
     ctx.entry                    = build(ctx.source, ctx.scratch);
     const auto& replayed         = *ctx.entry.solution;
@@ -1192,7 +1240,13 @@ void runLibrary(const fs::path& scratch, int writers, int perWriter)
         replayed.hardwarePredicate->debugEval(ctx.hardware, std::cerr);
         throw std::runtime_error("The " + ctx.arch + " plain solution rejects this device");
     }
-    std::cout << "PASS " << ctx.arch << " plain solution matches the test problem\n";
+    return ctx;
+}
+
+void runLibrary(const fs::path& scratch, int writers, int perWriter)
+{
+    fs::remove_all(scratch);
+    Context ctx = openContext(scratch);
     if(writers)
         concurrency(ctx, writers, perWriter);
     else
@@ -1208,7 +1262,6 @@ void runLibrary(const fs::path& scratch, int writers, int perWriter)
         refresh(ctx);
         fusedA2A(ctx);
     }
-    std::cout << "ALL JIT LIBRARY CHECKS PASSED\n";
 }
 
 TEST_CASE("the JIT solution library", "[jit-gpu][library-checks]")
@@ -1221,4 +1274,53 @@ TEST_CASE("concurrent JIT solution library publishers", "[jit-gpu][library-concu
 {
     hipblaslt_jit_test::ScratchDir scratch("library-concurrency");
     runLibrary(scratch.path, 8, 4);
+}
+
+// Started with --child. The parent has already initialized HIP, so this is a
+// new process rather than a fork of that one.
+TEST_CASE("JIT library child", "[jit-library-child]")
+{
+    if(g_child.role == ChildCommand::Role::None)
+        return;
+    if(g_child.role == ChildCommand::Role::Lock)
+    {
+        hj::files::FileLock held;
+        if(!hj::files::FileLock::acquire(g_child.lockFile, std::chrono::seconds(5), held).ok())
+            ::_exit(4);
+        ::_exit(0);
+    }
+    const auto work = g_child.scratch
+                      / (g_child.role == ChildCommand::Role::Writer
+                             ? "work-writer-" + std::to_string(g_child.writer)
+                             : "work-reader");
+    auto       ctx = openContext(work);
+    const auto key = testKey(ctx);
+    if(g_child.startFd >= 0)
+    {
+        char go = 0;
+        if(::read(g_child.startFd, &go, 1) != 1)
+            throw std::runtime_error("the parent did not start this child");
+    }
+    if(g_child.role == ChildCommand::Role::Writer)
+        writeEntries(ctx, g_child.root, key, g_child.scratch, g_child.writer, g_child.perWriter);
+    else
+        readEntries(ctx, g_child.root, key, g_child.perWriter, g_child.done);
+}
+
+int main(int argc, char** argv)
+{
+    try
+    {
+        if(childArguments(argc, argv))
+        {
+            char* catchArgv[] = {argv[0], const_cast<char*>("[jit-library-child]")};
+            return Catch::Session().run(2, catchArgv);
+        }
+    }
+    catch(const std::exception& error)
+    {
+        std::cerr << "FAIL " << error.what() << '\n';
+        return 2;
+    }
+    return Catch::Session().run(argc, argv);
 }

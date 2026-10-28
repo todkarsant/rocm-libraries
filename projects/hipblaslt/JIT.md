@@ -255,11 +255,12 @@ Every backend publishes what it builds. `jit::getLibraryAlgos`,
 `jit::getJitAlgo` and the heuristic queries share one lookup-then-publish
 helper: for one request it returns up to the requested number of solution
 indices, first the published solutions that match the request, then solutions
-that `Jit` generates with the supplied backend and publishes. A problem is
-generated at most once in the process; a later query returns the published
-indices and does not generate again. Any process then passes an index to
-`hipblaslt_ext::getAlgosFromIndex`, `hipblasLtMatmul` and `Gemm` as it would a
-prebuilt index.
+that `Jit` generates with the supplied backend and publishes. One requested
+count of one problem type, sizes, strides and workspace limit is generated at
+most once in the process; a later query for the same ones returns the
+published indices. Any other is generated on its own. Any process then
+passes an index to `hipblaslt_ext::getAlgosFromIndex`, `hipblasLtMatmul` and
+`Gemm` as it would a prebuilt index.
 
 **Location and permissions.** `JitLibrary` takes its root from the caller.
 The heuristic queries and `jit::getJitAlgo` use one process library whose
@@ -290,6 +291,8 @@ MX block and type) and the epilogue flags that change the kernel family. The
 slice is a standard lazy TensileLite library that the stock loader reads: a
 master file, the index mapping, and one entry (`.dat`) and code object (`.co`)
 per published executable. Other slices stay unread.
+A code object loads once per device and stays loaded when a later publish
+refreshes that slice.
 The directory also holds `helpers/`, one relocatable per helper
 kernel, named for the helper kernel's symbol. A solution's code object is the
 fully linked executable, produced by linking the main kernel with those helper
