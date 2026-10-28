@@ -415,10 +415,12 @@ namespace TensileLite
         // vector3's default ctor leaves members uninitialized, but this field is
         // read (calculateAutoGSU divides by it) before every solution sets it.
         dim3 workGroupSize{0, 0, 0};
-        dim3 threadTile;
+        // A two-element ThreadTile sets x and y only.
+        dim3 threadTile{0, 0, 0};
         dim3 macroTile;
 
-        std::array<int, 4> matrixInstruction;
+        // An empty or short MatrixInstruction sets only the entries it has.
+        std::array<int, 4> matrixInstruction{};
         size_t             grvwA = 1;
         size_t             grvwB = 1;
         size_t             gwvwC = 1;
@@ -534,7 +536,7 @@ namespace TensileLite
 
         int expertSchedulingMode = 0;
 
-        std::array<int, 2> waveGroup;
+        std::array<int, 2> waveGroup{};
     };
 
     struct StreamKStaticSplit
