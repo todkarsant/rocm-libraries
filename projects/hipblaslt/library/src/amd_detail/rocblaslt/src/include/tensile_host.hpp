@@ -275,6 +275,11 @@ bool topUpWithSizeIndependentSolutions(rocblaslt_handle                  handle,
                                        int                               requestedAlgoCount,
                                        size_t                            maxWorkSpaceBytes);
 
+#ifdef HIPBLASLT_ENABLE_JIT
+// The GEMM problem captured for gemmData, or null when this execution has none.
+const RocblasltContractionProblem* savedGemmProblem(const std::shared_ptr<void>& gemmData);
+#endif
+
 namespace TensileLite
 {
     class ProblemOverride;

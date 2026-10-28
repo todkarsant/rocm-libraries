@@ -19,6 +19,13 @@ std::vector<std::string> names(const std::vector<hipblaslt_jit::Artifact>& files
     return result;
 }
 
+TEST_CASE("endsWith matches only a trailing suffix", "[jit-cpu]")
+{
+    REQUIRE(hipblaslt_jit_test::endsWith("solution_WGM1", "_WGM1"));
+    REQUIRE(!hipblaslt_jit_test::endsWith("ab", "abc"));
+    REQUIRE(!hipblaslt_jit_test::endsWith("solution_WGM1_K512", "_WGM1"));
+}
+
 TEST_CASE("the source bundle reader accepts only a contained directory", "[jit-cpu]")
 {
     const auto root = fs::u8path(HIPBLASLT_JIT_SCRATCH);
