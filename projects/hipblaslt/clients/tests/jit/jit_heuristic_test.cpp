@@ -21,6 +21,19 @@ namespace
     using hipblaslt_jit_test::Device;
     using hipblaslt_jit_test::endsWith;
 
+#ifdef HIPBLASLT_JIT_HIPKITTENS
+    constexpr int M = 256;
+    constexpr int N = 256;
+    constexpr int kWide = 128;
+    constexpr int kNarrow = 256;
+    constexpr hipblasOperation_t opA = HIPBLAS_OP_T;
+    constexpr const char* wideSuffix = "HK_gemm_f16_TN";
+    constexpr const char* narrowSuffix = "HK_gemm_f16_TN";
+    // The K of the problem no JIT backend solves. The replayed bundle solves
+    // only NN, so the problem stays TN; the HipKittens kernels need K to be a
+    // multiple of 128, which this K is not.
+    constexpr int kOutside = 64;
+#else
     constexpr int M = hipblaslt_jit_test::Fp16Gemm::rows;
     constexpr int N = hipblaslt_jit_test::Fp16Gemm::cols;
     constexpr int kWide = 512;
@@ -28,6 +41,9 @@ namespace
     constexpr hipblasOperation_t opA = HIPBLAS_OP_N;
     constexpr const char* wideSuffix = "_K512_WGM8";
     constexpr const char* narrowSuffix = "_WGM1";
+    // The replayed bundle solves only NN, so a TN problem of any K is outside it.
+    constexpr int kOutside = kWide;
+#endif
     constexpr uint64_t workspaceLimit = 64ull << 20;
 
     bool nameMatches(const std::string& name, const std::string& token)
@@ -234,6 +250,10 @@ namespace
     void runFirst(hipblasLtHandle_t handle, hipblasLtMatmulDesc_t desc, hipStream_t stream, int K,
                   const hipblasLtMatmulHeuristicResult_t* result)
     {
+#ifdef HIPBLASLT_JIT_HIPKITTENS
+        // Fp16Gemm holds NN matrices of its own shape; this problem is TN.
+        return;
+#endif
         hipblaslt_jit_test::Fp16Gemm matrices(K);
         const size_t                 bytes = result ? result->workspaceSize : workspaceLimit;
         Device                       workspace(bytes);
@@ -317,9 +337,18 @@ namespace
             for(const auto& size : equalitySizes)
                 tuned = tuned || equalitySize(handle, desc, size[0], size[1], size[2]);
         }
+#ifdef HIPBLASLT_JIT_HIPKITTENS
+        {
+            const hipblasOperation_t transpose = HIPBLAS_OP_T;
+            INFO(("transpose A"));
+            REQUIRE((hipblasLtMatmulDescSetAttribute(
+                    desc, HIPBLASLT_MATMUL_DESC_TRANSA, &transpose, sizeof(transpose))
+                == HIPBLAS_STATUS_SUCCESS));
+        }
+#endif
 
-        Layouts wide(M, N, kWide);
-        Layouts narrow(M, N, kNarrow);
+        Layouts wide(M, N, kWide, opA == HIPBLAS_OP_T);
+        Layouts narrow(M, N, kNarrow, opA == HIPBLAS_OP_T);
         // One result fills the request, so the C++ query returns the same index.
         const auto cWide = queryC(handle, desc, pref, wide, 1);
         const auto cppWide
@@ -374,7 +403,7 @@ namespace
                         hipblasLtMatmulDescSetAttribute(
                             outside, HIPBLASLT_MATMUL_DESC_TRANSA, &transpose, sizeof(transpose))
                             == HIPBLAS_STATUS_SUCCESS);
-            Layouts    nn(M, N, kWide, true);
+            Layouts    nn(M, N, kOutside, true);
             const auto cT = queryC(handle, outside, pref, nn, 4);
             const auto cppT = queryCpp(handle, outside, HIPBLAS_OP_T, HIPBLAS_OP_N, nn, A.pointer,
                                        B.pointer, C.pointer, D.pointer, 4);

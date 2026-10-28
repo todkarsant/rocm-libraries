@@ -205,6 +205,19 @@ The implementations are:
   it through `jit::replay::createBackend` in `hipblaslt-jit-replay.hpp`, and
   every JIT build compiles it. Each bundle it returns names the request's
   target and code-object version.
+- HipKittens backend: `hipblaslt-jit-hipkittens.cpp`, built by default when
+  `GPU_TARGETS` includes gfx950 and the build reads MessagePack libraries.
+  `HIPBLASLT_JIT_ENABLE_HIPKITTENS=OFF` leaves it out. Each gfx950 TN kernel is a
+  `hipkittens::detail::Kernel`: an `Artifact` holding a HIP template from
+  `library/src/amd_detail/hipkittens`, with its compiler flags, that builds
+  its `ContractionSolution` in C++ with typed fields. The solution's
+  predicates decide which problems the kernel solves. Each bundle it returns
+  has that template as its main kernel and that solution, and names the
+  request's target and code-object version; comgr compiles it with its
+  generic HIP path. The HipKittens headers are staged next to the library
+  with `manifest.txt`, their sizes and SHA-256 sums; the backend starts only
+  when that file and every header match the copy compiled into the library.
+  `HIPBLASLT_JIT_HIPKITTENS_PATH` overrides that directory.
 
 ### Build
 
@@ -227,6 +240,11 @@ cmake --build "$project_build" --parallel
 `GPU_TARGETS` is `gfx90a`, `gfx942` or `gfx950`. The command above uses
 `gfx950`. The [JIT test guide](clients/tests/jit/README.md) lists the test
 targets and the validation commands.
+
+A JIT build that includes gfx950 also builds the HipKittens backend unless
+`HIPBLASLT_JIT_ENABLE_HIPKITTENS=OFF`. It needs a network fetch of the pinned
+HipKittens commit unless `FETCHCONTENT_SOURCE_DIR_HIPKITTENS` points at an
+unpacked archive.
 
 ### Algorithm lifetime and failures
 
@@ -340,7 +358,7 @@ path or ROCm path does not reject the directory.
 | Field | Contents |
 | --- | --- |
 | `target_id`, `isa`, `library_arch`, `wavefront_size` | Full target ID with features (for example `gfx950:sramecc+:xnack-`), ISA, TensileLite library architecture and wavefront size |
-| `backend_id`, `backend_version` | Backend identifier and integer version. The replay backend increments its version constant when a replayed solution can change. |
+| `backend_id`, `backend_version` | Backend identifier and integer version. Replay and HipKittens increment their version constants when a solution can change. |
 | `comgr` | comgr version, and on Linux the path, size and modification time of the loaded comgr library |
 | `code_object_version` | The code-object version that the generator and the builder use (4) |
 | `rocm_path` | The ROCm path that the builder passes to comgr |

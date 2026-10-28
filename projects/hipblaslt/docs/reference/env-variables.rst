@@ -345,3 +345,8 @@ GEMM support. A build without that support does not consult them.
         | Directory where generated solutions are stored. Read once per process.
       - | Unset or empty: ``/tmp/hipblaslt-jit-<uid>`` on Linux and ``%TEMP%\\hipblaslt-jit-<user>`` on Windows
         | A directory path: that directory is the library root. hipBLASLt creates it when missing and refuses a symbolic link, a path owned by another user, or a directory writable by group or others
+
+    * - | ``HIPBLASLT_JIT_HIPKITTENS_PATH``
+        | Directory of the HipKittens headers that the gfx950 HipKittens JIT backend compiles with. Read once per process, when the backend starts.
+      - | Unset or empty: ``hipblaslt/hipkittens/<commit>`` next to the hipBLASLt library, then under the installed library directory
+        | A directory path: that directory. Its ``manifest.txt`` and every header must match this build; otherwise hipBLASLt warns once and the backend is not available

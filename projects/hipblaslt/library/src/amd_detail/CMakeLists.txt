@@ -34,6 +34,7 @@ if(HIPBLASLT_ENABLE_JIT)
         "${CMAKE_CURRENT_SOURCE_DIR}/hipblaslt-jit-backend.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/hipblaslt-jit-replay-backend.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/hipblaslt-jit-mode.cpp")
+    include("${PROJECT_SOURCE_DIR}/cmake/hipblaslt-jit-hipkittens.cmake")
     # The replay backend reads this tree. It is a compile-time path, not an
     # environment variable, and only a test build has that tree. An installed
     # library must not point at the build machine's sources.

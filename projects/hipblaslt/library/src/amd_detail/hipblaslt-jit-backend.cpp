@@ -513,6 +513,9 @@ namespace hipblaslt_ext::experimental
 
 namespace hipblaslt_jit
 {
+#ifdef HIPBLASLT_JIT_HIPKITTENS
+    std::shared_ptr<const Jit> makeHipKittensJit();
+#endif
 
     namespace
     {
@@ -557,6 +560,18 @@ namespace hipblaslt_jit
             return jit;
         }
 
+        std::shared_ptr<const Jit> hipkittensProcess()
+        {
+#ifdef HIPBLASLT_JIT_HIPKITTENS
+            static std::once_flag             once;
+            static std::shared_ptr<const Jit> hipkittens;
+            std::call_once(once, [] { hipkittens = makeHipKittensJit(); });
+            return hipkittens;
+#else
+            return {};
+#endif
+        }
+
         // Every backend this build compiled, in the order a query asks them for
         // the slots still open.
         std::vector<std::shared_ptr<const Jit>> processBackends()
@@ -564,6 +579,8 @@ namespace hipblaslt_jit
             std::vector<std::shared_ptr<const Jit>> backends;
             if(auto replay = replayProcess())
                 backends.push_back(std::move(replay));
+            if(auto hipkittens = hipkittensProcess())
+                backends.push_back(std::move(hipkittens));
             return backends;
         }
     }

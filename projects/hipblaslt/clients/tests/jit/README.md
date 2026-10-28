@@ -39,6 +39,9 @@ The CTest tests are:
   `jit-heuristic-off`, `jit-heuristic-fallback` and `jit-heuristic-forced`.
   CTest runs `jit-publish` before `jit-loader`. A build with
   `HIPBLASLT_ENABLE_JIT=OFF` has `jit-heuristic-ignored` instead.
+- A JIT build with gfx950 and `HIPBLASLT_JIT_ENABLE_HIPKITTENS` left on also
+  has `jit-hipkittens` (`jit-gpu`), and its heuristic tests query the TN
+  256x256 problems the HipKittens kernels solve instead of `plain-pair`.
 
 `jit-launch-cpu` and the `jit-gpu` tests exist when `GPU_TARGETS` include an
 architecture with committed assembly. A build with `HIPBLASLT_ENABLE_YAML=ON`
@@ -63,6 +66,7 @@ has none of them, because the library entry is MsgPack.
 | `jit-heuristic-fallback` | `HIPBLASLT_JIT=1`. With no device library, every returned algorithm is JIT and the first result for K=512 matches the host. With a device library, an Equality size returns Equality algorithms, then JIT, then the others, with no repeated kernel, and an untuned size starts with JIT. A matmul with a null algo launches the first K=512 result and matches the host. Without such a library the ordering check prints `SKIP heuristic-provider-order: the build has no device library with an Equality size` |
 | `jit-heuristic-forced` | `HIPBLASLT_JIT=2`. Both queries return only JIT library indices. K=512 selects the solution ending in `_K512_WGM8` and K=256 the one ending in `_WGM1`. A transposed A returns no algorithm. The first K=512 result matches the host, also when a null algo selects it. Each JIT result reports as `wavesCount` its kernel's tile grid divided by the compute units. The first query is a miss and generation runs. The C++ query of the same problem is a hit and generation does not run |
 | `jit-heuristic-ignored` | Built only with `HIPBLASLT_ENABLE_JIT=OFF`, with `HIPBLASLT_JIT=2`. The queries do not return JIT algorithms |
+| `jit-hipkittens` | Built only with gfx950 and `HIPBLASLT_JIT_ENABLE_HIPKITTENS` on, which is the default. The compiled-in BF16 and FP16 kernels and the solution each builds, a capturing stream that returns no solution without compiling when the library is empty, a BF16 TN 256x256x128 GEMM whose D is 128 and which publishes a library index, a later capture that returns that index without compiling, M=128 rejected, and four alphas whose products 129.5, 129.75, 128.5 and 130.5 round to nearest even BF16. A copy of the staged headers is rejected once a header or `manifest.txt` has a changed byte, or a header is missing. The test points `HIPBLASLT_JIT_LIBRARY_PATH` and `HIPBLASLT_JIT_HIPKITTENS_PATH` at scratch directories it creates |
 
 ## Test parameters
 
@@ -72,7 +76,7 @@ Run `jit-publish` before `jit-loader`; the loader reads the library the
 publisher wrote. Problems are FP16 with M=256, N=128 and K=512, 1024 or 256.
 The only environment variables a test sets are the user-facing ones:
 `HIPBLASLT_JIT` and `HIPBLASLT_JIT_LIBRARY_PATH`, pointed at a scratch
-directory the test creates.
+directory the test creates, and in `jit-hipkittens` `HIPBLASLT_JIT_HIPKITTENS_PATH`.
 
 `hipblaslt-jit-end-to-end-test` has two cases. Each creates the replay backend
 for the device's `plain` bundle in the data directory with
