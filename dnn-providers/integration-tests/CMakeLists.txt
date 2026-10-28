@@ -432,6 +432,26 @@ clang_tidy_check(${INTEGRATION_TESTS_EXE})
 # (see dnn-providers/miopen-provider) which runs this binary against a specific
 # engine and selects tests via that provider's test_categories_integration.yaml.
 
+# The one exception needs no plugin: --benchmark-reference with a mode that never
+# runs a reference must be refused before any engine loads. PASS_REGULAR_EXPRESSION
+# replaces the exit-code check, and the refusal message is printed only on that
+# exit. A device-less runner passes, as the binary skips itself before parsing.
+add_test(
+    NAME hipdnn_integration_tests_benchmark_reference_refusal
+    COMMAND ${INTEGRATION_TESTS_EXE} --benchmark-reference --skip-graph-validation
+)
+set_tests_properties(hipdnn_integration_tests_benchmark_reference_refusal PROPERTIES
+    PASS_REGULAR_EXPRESSION
+    "--benchmark-reference cannot be combined with --skip-graph-validation|No HIP devices available"
+)
+set(HIPDNN_IT_BENCHMARK_REFERENCE_REFUSAL_TEST hipdnn_integration_tests_benchmark_reference_refusal)
+# The shared categorization block above already ran (it sets
+# HIPDNN_IT_YAML_CATEGORIZATION_ENABLED) and this test did not exist yet, so it is
+# labeled here instead of being folded into that block.
+if(HIPDNN_IT_YAML_CATEGORIZATION_ENABLED)
+    _apply_provider_ctest_category_labels(${HIPDNN_IT_BENCHMARK_REFERENCE_REFUSAL_TEST})
+endif()
+
 add_subdirectory(gpu-ref)
 add_subdirectory(tests)
 
