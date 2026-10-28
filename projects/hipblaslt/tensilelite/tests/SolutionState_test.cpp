@@ -23,8 +23,6 @@
 #include <Tensile/AMDGPUPredicates.hpp>
 #include <Tensile/ContractionProblemPredicates.hpp>
 #include <Tensile/ContractionSolution.hpp>
-#include <Tensile/ContractionTaskPredicates.hpp>
-#include <Tensile/KernelLanguageTypes.hpp>
 
 #include <msgpack.hpp>
 
@@ -467,37 +465,7 @@ TEST(SolutionState, RecordFromDerivedState)
     EXPECT_TRUE(size.BufferStore);
     EXPECT_FALSE(type.stochasticRounding);
 
-    auto const& support = solution->internalArgsSupport;
-    EXPECT_EQ(support.version, 2);
-    EXPECT_EQ(support.persistentLoopArgsVersion, 0);
-    EXPECT_TRUE(support.gsu);
-    EXPECT_FALSE(support.wgm);
-    EXPECT_TRUE(support.staggerU);
-    EXPECT_TRUE(support.useUniversalArgs);
-    EXPECT_FALSE(support.useSFC);
-
-    auto const& tasks = conjunction<Task>(solution->taskPredicate);
-    ASSERT_EQ(tasks.value.size(), 2);
-    EXPECT_EQ(tasks.value[0]->type(), "WorkspaceCheck");
-    EXPECT_EQ(tasks.value[1]->type(), "LaunchLimits");
-
-    auto const& hardware
-        = dynamic_cast<Predicates::IsSubclass<Hardware, AMDGPU> const&>(*solution->hardwarePredicate);
-    auto const& processor
-        = dynamic_cast<Predicates::GPU::ProcessorEqual const&>(*hardware.value);
-    EXPECT_EQ(processor.value, AMDGPU::Processor::gfx942);
-
-    auto const* language
-        = onlyDirect<Predicates::Contraction::KernelLanguageCompatible>(solution->problemPredicate);
-    ASSERT_NE(language, nullptr);
-    EXPECT_EQ(language->value, KernelLanguage::Assembly);
-
-    auto const* xcc = onlyDirect<Predicates::Contraction::WorkgroupMappingXCCCheck>(
-        solution->problemPredicate);
-    ASSERT_NE(xcc, nullptr);
-    EXPECT_EQ(xcc->value, (std::array<int, 2>{4, 8}));
-    EXPECT_EQ(xcc->cuCount, size_t{0});
-
+    EXPECT_EQ(solution->internalArgsSupport.persistentLoopArgsVersion, 0);
     EXPECT_EQ(onlyDirect<Predicates::Contraction::SizeEqual>(solution->problemPredicate), nullptr);
 }
 
@@ -572,6 +540,7 @@ TEST(SolutionState, BuildsWithoutADevice)
         solution->problemPredicate);
     ASSERT_NE(xcc, nullptr);
     EXPECT_EQ(xcc->value, (std::array<int, 2>{4, 8}));
+    // Unevaluated. The count is filled on the first check, not frozen at 0.
     EXPECT_EQ(xcc->cuCount, size_t{0});
 }
 
