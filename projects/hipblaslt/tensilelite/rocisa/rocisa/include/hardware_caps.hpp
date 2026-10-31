@@ -212,6 +212,9 @@ inline std::map<std::string, int>
     // If HasWMMA_V3 is set, force HasWMMA_V2 off so the wmma_v3 path is used
     if(rv["HasWMMA_V3"])
         rv["HasWMMA_V2"] = false;
+    // gfx1250-strict and gfx1250v0 share this ISA version; TensileLite's
+    // ARCH_CAP_OVERRIDES clears it for them.
+    rv["HasWMMA_fp8_16x16x128"] = checkInList(isaVersion, {{12, 5, 0}});
     rv["HasWMMA_V3_f64"]
         = tryAssembler(isaVersion,
                        assemblerPath,
@@ -671,6 +674,12 @@ inline std::map<std::string, int> initArchCaps(const IsaVersion& isaVersion)
     rv["RequiresXCntForVolatileVMEM"]  = checkInList(isaVersion, {{12, 5, 0}});
     rv["EnableXnackReplay"]            = checkInList(isaVersion, {{12, 5, 0}});
     rv["DefaultScopeIsCULocal"]        = checkInList(isaVersion, {{12, 5, 0}});
+
+    // gfx1250-strict and gfx1250v0 share this ISA version; TensileLite's
+    // ARCH_CAP_OVERRIDES clears these for them.
+    rv["HasCvtScalePk8FP4"]      = checkInList(isaVersion, {{12, 5, 0}});
+    rv["HasCvtScalePk8F16toFP8"] = checkInList(isaVersion, {{12, 5, 0}});
+    rv["HasF16Accumulation"]     = checkInList(isaVersion, {{12, 5, 0}});
 
     // LDS bank geometry — used for swizzle/rotation in subtile-based tiling.
     rv["LDSBankCount"] = 64;

@@ -119,6 +119,9 @@ std::map<std::string, int> initAsmCaps(const IsaVersion& v, const MnemonicMap& m
     if (rv["HasWMMA_V3"]) rv["HasWMMA_V2"] = 0;
     rv["HasWMMA_V3_f64"] = hasAnyMnemonic(m, {"v_wmma_f64_16x16x4_f64", "v_wmma_f64_16x16x8_f64"});
     rv["HasWMMA_f8f6f4"] = hasMnemonic(m, "v_wmma_f32_16x16x128_f8f6f4");
+    // gfx1250-strict and gfx1250v0 share this ISA version; TensileLite's
+    // ARCH_CAP_OVERRIDES clears it for them.
+    rv["HasWMMA_fp8_16x16x128"] = checkInList(v, {{12, 5, 0}});
 
     rv["HasAdd_PC_i64"] = 0;
 
@@ -342,6 +345,12 @@ std::map<std::string, int> initArchCaps(const IsaVersion& v, GfxArchID archID) {
     rv["RequiresXCntForVolatileVMEM"] = checkInList(v, {{12, 5, 0}});
     rv["EnableXnackReplay"] = checkInList(v, {{12, 5, 0}});
     rv["DefaultScopeIsCULocal"] = checkInList(v, {{12, 5, 0}});
+
+    // gfx1250-strict and gfx1250v0 share this ISA version; TensileLite's
+    // ARCH_CAP_OVERRIDES clears these for them.
+    rv["HasCvtScalePk8FP4"] = checkInList(v, {{12, 5, 0}});
+    rv["HasCvtScalePk8F16toFP8"] = checkInList(v, {{12, 5, 0}});
+    rv["HasF16Accumulation"] = checkInList(v, {{12, 5, 0}});
 
     rv["LDSBankCount"] = 64;
     rv["LDSBankWidth"] = 4;
