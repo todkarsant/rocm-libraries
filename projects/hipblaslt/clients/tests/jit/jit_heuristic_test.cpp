@@ -230,18 +230,20 @@ namespace
         }
     }
 
+    // A null result passes a null algo, which leaves the selection to hipblasLtMatmul.
     void runFirst(hipblasLtHandle_t handle, hipblasLtMatmulDesc_t desc, hipStream_t stream, int K,
-                  const hipblasLtMatmulHeuristicResult_t& result)
+                  const hipblasLtMatmulHeuristicResult_t* result)
     {
         hipblaslt_jit_test::Fp16Gemm matrices(K);
-        Device                       workspace(result.workspaceSize);
+        const size_t                 bytes = result ? result->workspaceSize : workspaceLimit;
+        Device                       workspace(bytes);
         float                        alpha = 1.25f, beta = 0.5f;
         matrices.matmul(handle,
                         desc,
                         stream,
-                        &result.algo,
+                        result ? &result->algo : nullptr,
                         workspace.pointer,
-                        result.workspaceSize,
+                        bytes,
                         alpha,
                         beta,
                         "");
@@ -342,7 +344,7 @@ namespace
             requireSameIndex(publishedIndex(cNarrow.results.front()),
                              publishedIndex(cppNarrow.results.front()));
 #endif
-            runFirst(handle, desc, stream, kWide, cWide.results.front());
+            runFirst(handle, desc, stream, kWide, &cWide.results.front());
         }
         else
         {
@@ -355,11 +357,14 @@ namespace
 #endif
             requireUniqueKernels(handle, cWide);
             requireUniqueKernels(handle, cppWide);
-            runFirst(handle, desc, stream, kWide, cWide.results.front());
+            runFirst(handle, desc, stream, kWide, &cWide.results.front());
         }
 
         if(mode == "forced" || mode == "fallback")
         {
+            // A null algo launches the first ranked result, the JIT one checked above.
+            runFirst(handle, desc, stream, kWide, nullptr);
+
             hipblasLtMatmulDesc_t    outside{};
             const hipblasOperation_t transpose = HIPBLAS_OP_T;
             JIT_REQUIRE("transposed descriptor",

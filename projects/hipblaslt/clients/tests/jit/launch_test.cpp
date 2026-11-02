@@ -12,10 +12,12 @@
 #include <hipblaslt/hipblaslt-version.h>
 
 #include <algorithm>
+#include <atomic>
 #include <chrono>
 #include <cmath>
 #include <filesystem>
 #include <string>
+#include <thread>
 #include <vector>
 
 // Compiles this device's committed assembly, publishes the code object into
@@ -308,6 +310,52 @@ TEST_CASE("a held file lock times out and is acquired once released", "[jit-cpu]
     held.release();
     const auto freed = hj::files::FileLock::acquire(file, std::chrono::seconds(1), second);
     JIT_REQUIRE("A released lock was not acquired: " + freed.message, freed.ok());
+}
+
+TEST_CASE("concurrent lookups generate one problem once", "[jit-gpu]")
+{
+    const auto target = hipblaslt_jit_test::currentDeviceTarget();
+    const auto root   = fs::u8path(HIPBLASLT_JIT_LAUNCH_SCRATCH) / "generate-once";
+    fs::remove_all(root);
+    hj::BackendInfo backend;
+    backend.id               = "generate-once";
+    backend.version          = 1;
+    const auto     problem   = hipblaslt_jit_test::fp16Gemm(false, 128);
+    constexpr auto workspace = hipblaslt_jit_test::workspaceLimit;
+    hj::JitLibrary library(root);
+
+    auto calls = std::make_shared<std::atomic<int>>(0);
+    auto generate
+        = [calls](size_t, const std::vector<std::string>&, std::vector<int32_t>&, hj::Status&) {
+              std::this_thread::sleep_for(std::chrono::milliseconds(200));
+              calls->fetch_add(1);
+          };
+
+    std::string errors[2];
+    auto        worker = [&](std::string& error) {
+        try
+        {
+            library.beginQuery(true, target, backend, workspace, {}, generate);
+            const auto found  = library.findTopSolutions(problem, *target.hardware, 1);
+            const auto status = library.queryStatus();
+            library.endQuery();
+            if(!status.ok())
+                error = status.message.empty() ? "lookup failed" : status.message;
+            else if(!found.empty())
+                error = "a lookup with no publisher returned a solution";
+        }
+        catch(const std::exception& failure)
+        {
+            error = failure.what();
+        }
+    };
+    std::thread first(worker, std::ref(errors[0]));
+    std::thread second(worker, std::ref(errors[1]));
+    first.join();
+    second.join();
+    JIT_REQUIRE(errors[0].empty() ? errors[1] : errors[0], errors[0].empty() && errors[1].empty());
+    JIT_REQUIRE("The problem was generated " + std::to_string(calls->load()) + " times",
+                calls->load() == 1);
 }
 
 // A generator that rejects one layout of a problem must not stop the same

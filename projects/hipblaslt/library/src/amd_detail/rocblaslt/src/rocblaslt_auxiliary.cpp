@@ -1212,6 +1212,43 @@ namespace
         return status;
     }
 }
+
+rocblaslt_status selectDefaultContractionAlgo(rocblaslt_handle                   handle,
+                                              RocblasltContractionProblem const& prob,
+                                              std::shared_ptr<void>              gemmData,
+                                              rocblaslt_matmul_heuristic_result& result)
+{
+    const auto providerRows = bestSolutionRows(handle, prob, gemmData, prob.workspaceSize);
+    const auto ranked
+        = rankJitHeuristic(handle, &prob, prob.workspaceSize, 1, nullptr, 0, providerRows);
+    if(ranked.handled)
+    {
+        if(ranked.results.empty())
+            return rocblaslt_status_not_implemented;
+        result = ranked.results.front();
+        return rocblaslt_status_success;
+    }
+
+    int        count = 0;
+    const auto status
+        = getBestSolutions(prob, handle, gemmData, 1, &result, &count, prob.workspaceSize);
+    if(count == 0)
+        return rocblaslt_status_not_implemented;
+    return status;
+}
+#else
+rocblaslt_status selectDefaultContractionAlgo(rocblaslt_handle                   handle,
+                                              RocblasltContractionProblem const& prob,
+                                              std::shared_ptr<void>              gemmData,
+                                              rocblaslt_matmul_heuristic_result& result)
+{
+    int        count = 0;
+    const auto status
+        = getBestSolutions(prob, handle, gemmData, 1, &result, &count, prob.workspaceSize);
+    if(count == 0)
+        return rocblaslt_status_not_implemented;
+    return status;
+}
 #endif
 
 #ifdef __cplusplus
