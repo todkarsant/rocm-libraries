@@ -3,10 +3,10 @@
 
 """The C++ solution-state tables have to stay the Python tables.
 
-solutionFromState copies the data-type names and the build chip ids by hand.
-The installed tensilelite test tree does not contain SolutionState.cpp, so
-this test compares Python to the checked-in lists. SolutionRecord reads those
-same lists back out of SolutionState.cpp.
+solutionFromState reads data types by rocisa's names and checks the build chip
+ids of Architectures.hpp. The installed tensilelite test tree does not contain
+those sources, so this test compares Python to the checked-in lists. SolutionRecord reads the
+C++ lists back through supportedBuildChipIds() and supportedDataTypeNames().
 """
 
 from pathlib import Path

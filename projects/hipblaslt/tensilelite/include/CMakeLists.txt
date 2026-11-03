@@ -10,6 +10,7 @@ target_sources(tensilelite-host
                 "${CMAKE_CURRENT_SOURCE_DIR}/Tensile/AMDGPUPredicates.hpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/Tensile/AMDGPU_Detail.hpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/Tensile/Activation.hpp"
+                "${CMAKE_CURRENT_SOURCE_DIR}/Tensile/Architectures.hpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/Tensile/CachingLibrary.hpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/Tensile/Comparison.hpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/Tensile/ContractionLibrary.hpp"
@@ -129,6 +130,7 @@ else()
             FILE_SET tensilelite_private_headers TYPE HEADERS
                 FILES
                     "${CMAKE_CURRENT_SOURCE_DIR}/Tensile/msgpack/Loading.hpp"
+                    "${CMAKE_CURRENT_SOURCE_DIR}/Tensile/msgpack/SolutionStateCatalog.hpp"
     )
 endif()
 

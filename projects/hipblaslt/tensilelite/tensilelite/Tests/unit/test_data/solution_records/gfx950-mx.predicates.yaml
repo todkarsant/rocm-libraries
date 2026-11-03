@@ -1,12 +1,14 @@
 problem:
   type: And
   value:
+  - type: BoundSizeMultiple
+    index: -1
+    value: 32
   - type: OperationIdentifierEqual
-    value: Contraction_l_Ailk_Bljk_Cijk_Dijk
+    value: Contraction_l_Alik_Bljk_Cijk_Dijk
   - type: BiasDataTypeWhiteList
     value:
     - 0
-    - 4
   - type: GateResidualDataTypeWhiteList
     value: []
   - type: BiasSrcWhiteList
@@ -14,18 +16,26 @@ problem:
     - 3
   - type: AmaxDCheck
     value: false
+  - type: ActivationEnumWhiteList
+    value:
+    - None
+    - Gelu
+    - Relu
+    - Sigmoid
+    - Silu
+    - Clamp
   - type: TypesEqual
     value:
-    - Half
-    - Half
-    - Half
-    - Half
-    - Half
-    - Half
+    - Float8
+    - Float8
+    - Float
+    - Float
+    - Float8
+    - Float8
   - type: HighPrecisionAccumulate
     value: true
   - type: Activation
-    value: None
+    value: Hipblaslt_all
   - type: ActivationComputeType
     value: Float
   - type: ActivationNoGuard
@@ -33,29 +43,29 @@ problem:
   - type: UseGradient
     value: false
   - type: UseBias
-    value: 0
+    value: 1
   - type: UseE
     value: false
   - type: UseGateResidual
     value: false
   - type: DataTypeE
-    value: Half
+    value: Float
   - type: StridedBatched
     value: true
   - type: GroupedGemm
-    value: false
+    value: true
   - type: UseScaleAB
-    value: ''
+    value: Scalar
   - type: UseScaleCD
     value: false
   - type: UseScaleAlphaVec
-    value: 0
+    value: 1
   - type: Sparse
     value: 0
   - type: F32XdlMathOp
     value: Float
   - type: SupportDeviceUserArguments
-    value: false
+    value: true
   - type: SwizzleTensorA
     value: false
   - type: SwizzleTensorB
@@ -63,26 +73,25 @@ problem:
   - type: FusedGemmA2A
     value: false
   - type: MXBlockA
-    value: 0
+    value: 32
+  - type: DataTypeMXSA
+    value: E8
+  - type: MXBlockFreeA
+    value: 1
   - type: MXBlockB
-    value: 0
-  - type: SynchronizerSizeCheck
-    index: 0
-    value:
-    - 16
-    - 16
-    - 1
-    - 4
-    - 1
-    - 1
+    value: 32
+  - type: DataTypeMXSB
+    value: E8
+  - type: MXBlockFreeB
+    value: 1
   - type: WorkgroupNumberCheck
     index: 0
     value:
-    - 16
-    - 16
+    - 64
+    - 64
     - 1
   - type: LeadingFree0SizesGreaterOrEqual
-    value: 4
+    value: 1
   - type: LeadingFree1SizesGreaterOrEqual
     value: 1
   - type: KernelLanguageCompatible
@@ -90,20 +99,20 @@ problem:
   - type: BufferLoadOffsetLimitCheck
     value:
       ShiftPtrElemB: 0
-      ShiftPtrElemA: 4
-      DUorMT1: 16
-      DUorMT0: 16
+      ShiftPtrElemA: 0
+      DUorMT1: 64
+      DUorMT0: 64
   - type: BufferLoadOffsetLimitCheck_Beta
-    value: 16
+    value: 64
   - type: BufferStoreOffsetLimitCheck
-    value: 16
+    value: 64
   - type: GlobalSplitUCheckMinK
     value:
     - 32
     - 1
   - type: WorkgroupMappingXCCCheck
     value:
-    - 1
+    - 2
     - -1
 task:
   type: And
@@ -113,5 +122,9 @@ task:
 hardware:
   type: AMDGPU
   value:
-    type: Processor
-    value: gfx942
+    type: And
+    value:
+    - type: Processor
+      value: gfx950
+    - type: PciChipId
+      value: 30112
