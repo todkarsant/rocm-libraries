@@ -312,6 +312,12 @@ namespace
         hipblasLtMatmulPreference_t pref{};
         hipStream_t                 stream{};
         JIT_REQUIRE("hipblasLtCreate", hipblasLtCreate(&handle) == HIPBLAS_STATUS_SUCCESS);
+#ifdef HIPBLASLT_JIT_HIPKITTENS
+        // The HipKittens kernels are hand-written, which uniform summation
+        // order refuses, and a handle enables it by default.
+        JIT_REQUIRE("hipblasLtSetUniformSummationOrder",
+                    hipblasLtSetUniformSummationOrder(handle, 0) == HIPBLAS_STATUS_SUCCESS);
+#endif
         JIT_REQUIRE("hipblasLtMatmulDescCreate",
                     hipblasLtMatmulDescCreate(&desc, HIPBLAS_COMPUTE_32F, HIP_R_32F)
                         == HIPBLAS_STATUS_SUCCESS);
