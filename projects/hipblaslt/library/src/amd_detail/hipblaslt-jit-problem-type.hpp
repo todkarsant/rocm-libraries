@@ -4,25 +4,13 @@
 
 #include <Tensile/ContractionProblem.hpp>
 #include <Tensile/ContractionSolution.hpp>
-#include <cstddef>
-
-namespace hipblaslt_ext::experimental::jit::detail
-{
-    struct GemmRequest;
-}
 
 namespace hipblaslt_jit
 {
-    // The TensileLite problem hipBLASLt solves for a rocBLASLt GEMM.
-    TensileLite::ContractionProblemGemm RocblasltToTensileContractionProblemGemm(
-        const hipblaslt_ext::experimental::jit::detail::GemmRequest& request);
-
     // A single strided batched GEMM in TensileLite's canonical index form.
     struct CanonicalGemm
     {
-        bool   transA = false, transB = false;
-        bool   conjugateA = false, conjugateB = false;
-        size_t m = 0, n = 0, k = 0, batch = 0;
+        bool transA = false, transB = false;
     };
 
     // Why JIT does not implement the problem, or nullptr when it does. A

@@ -92,7 +92,7 @@ TEST_CASE("a published JIT solution launches", "[jit-gpu]")
     JIT_REQUIRE("publish did not return one JIT solution index",
                 published.size() == 1 && hj::isJitIndex(published.front()));
 
-    library.beginQuery(false, target, backend, workspace, {}, nullptr);
+    library.beginQuery(target, backend, workspace, {});
     const auto found   = library.findTopSolutions(problem, *target.hardware, 1);
     const auto byIndex = library.getSolutionByIndex(problem, *target.hardware, published.front());
     const auto query   = library.queryStatus();
@@ -189,7 +189,7 @@ TEST_CASE("a published JIT solution launches", "[jit-gpu]")
     const auto other = library.buildDirectory().parent_path() / "another-build";
     fs::rename(library.buildDirectory(), other);
     hj::JitLibrary fresh(libraryRoot);
-    fresh.beginQuery(false, target, backend, workspace, {}, nullptr);
+    fresh.beginQuery(target, backend, workspace, {});
     const auto unseen = fresh.findTopSolutions(problem, *target.hardware, 1);
     fresh.endQuery();
     JIT_REQUIRE("A library published by another build was read", unseen.empty());

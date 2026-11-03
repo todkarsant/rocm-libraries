@@ -32,16 +32,11 @@ namespace hipblaslt_jit
                 "implemented");
         require(problem.c().dataType() == problem.d().dataType(),
                 "TensileLite ProblemType requires matching C and D datatypes");
-        const auto conjugate = [](const TensileLite::TensorOps& ops) {
-            require(ops.empty()
-                        || (ops.size() == 1
-                            && ops.front().type == TensileLite::TensorOp::Type::ComplexConjugate),
+        for(const auto* ops : {&problem.aOps(), &problem.bOps()})
+            require(ops->empty()
+                        || (ops->size() == 1
+                            && ops->front().type == TensileLite::TensorOp::Type::ComplexConjugate),
                     "the input tensor operation cannot be represented by TensileLite ProblemType");
-            return !ops.empty();
-        };
-        CanonicalGemm gemm;
-        gemm.conjugateA = conjugate(problem.aOps());
-        gemm.conjugateB = conjugate(problem.bOps());
         require(problem.cOps().empty() && problem.dOps().empty(),
                 "TensileLite ProblemType does not describe C/D tensor operations");
         require(problem.freeIndicesA().size() == 1 && problem.freeIndicesB().size() == 1
@@ -51,12 +46,9 @@ namespace hipblaslt_jit
         for(const auto* tensor : {&problem.a(), &problem.b(), &problem.c(), &problem.d()})
             require(tensor->dimensions() == 3 && tensor->strides().at(0) == 1,
                     "expected three-dimensional column-major tensor descriptors");
+        CanonicalGemm gemm;
         gemm.transA = problem.freeIndicesA()[0].i == 1;
         gemm.transB = problem.freeIndicesB()[0].i == 0;
-        gemm.m      = problem.freeSizeA(0);
-        gemm.n      = problem.freeSizeB(0);
-        gemm.k      = problem.boundSize(0);
-        gemm.batch  = problem.batchSize(0);
         return gemm;
     }
 

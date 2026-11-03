@@ -720,11 +720,6 @@ namespace hipblaslt_jit
 #undef HIPBLASLT_JIT_TO_STR2
     }
 
-    const fs::path& JitLibrary::root() const noexcept
-    {
-        return m_root;
-    }
-
     fs::path JitLibrary::buildDirectory() const
     {
         return m_root / ("v" + std::to_string(jitLibrarySchema))
@@ -1294,12 +1289,10 @@ namespace hipblaslt_jit
         struct ActiveQuery
         {
             bool                     engaged = false;
-            bool                     allowGeneration = false;
             DeviceTarget             target;
             BackendInfo              backend;
             size_t                   workspace = 0;
             std::vector<std::string> exclude;
-            JitLibrary::GenerateMissing generate;
             Status                   failure;
         };
 
@@ -1308,81 +1301,50 @@ namespace hipblaslt_jit
             thread_local ActiveQuery query;
             return query;
         }
-
-        TensileLite::SolutionVector<TensileLite::ContractionSolution>
-            solutionsFor(JitLibrary&                                  library,
-                         const TensileLite::ContractionProblemGemm&   problem,
-                         const TensileLite::Hardware&                 hardware,
-                         int                                          numSolutions,
-                         bool                                         generate)
-        {
-            using Solution = TensileLite::ContractionSolution;
-            TensileLite::SolutionVector<Solution> result;
-            auto&                                 query = activeQuery();
-            if(!query.engaged || numSolutions <= 0 || problem.groupedGemm())
-                return result;
-            auto problemCopy = problem;
-            problemCopy.setWorkspaceSize(query.workspace);
-            const auto key = CacheKey::make(query.target, query.backend, jitCodeObjectVersion);
-            std::vector<int32_t> indices;
-            query.failure = library.lookup(key,
-                                           query.target.device,
-                                           problemCopy,
-                                           hardware,
-                                           static_cast<size_t>(numSolutions),
-                                           query.exclude,
-                                           indices);
-            const bool miss = indices.size() < static_cast<size_t>(numSolutions);
-            if(generate && query.allowGeneration && miss && query.generate && query.failure.ok())
-            {
-                auto exclude = query.exclude;
-                for(auto index : indices)
-                {
-                    Status why;
-                    if(auto solution
-                       = library.solutionByIndex(query.target.device, hardware, index, why))
-                        if(!excludedKernel(exclude, solution->kernelName))
-                            exclude.push_back(solution->kernelName);
-                }
-                std::vector<int32_t> extra;
-                query.generate(static_cast<size_t>(numSolutions) - indices.size(),
-                               exclude,
-                               extra,
-                               query.failure);
-                for(auto index : extra)
-                    if(std::find(indices.begin(), indices.end(), index) == indices.end())
-                        indices.push_back(index);
-                if(!indices.empty())
-                    query.failure = {};
-            }
-            if(indices.size() > static_cast<size_t>(numSolutions))
-                indices.resize(static_cast<size_t>(numSolutions));
-            for(auto index : indices)
-            {
-                Status why;
-                if(auto solution = library.solutionByIndex(query.target.device, hardware, index, why))
-                    result.push_back(std::move(solution));
-            }
-            return result;
-        }
     }
 
-    void JitLibrary::beginQuery(bool                     allowGeneration,
-                                const DeviceTarget&      target,
+    TensileLite::SolutionVector<TensileLite::ContractionSolution>
+        JitLibrary::solutionsFor(const TensileLite::ContractionProblemGemm& problem,
+                                 const TensileLite::Hardware&               hardware,
+                                 int                                        numSolutions)
+    {
+        using Solution = TensileLite::ContractionSolution;
+        TensileLite::SolutionVector<Solution> result;
+        auto&                                 query = activeQuery();
+        if(!query.engaged || numSolutions <= 0 || problem.groupedGemm())
+            return result;
+        auto problemCopy = problem;
+        problemCopy.setWorkspaceSize(query.workspace);
+        const auto key = CacheKey::make(query.target, query.backend, jitCodeObjectVersion);
+        std::vector<int32_t> indices;
+        query.failure = lookup(key,
+                               query.target.device,
+                               problemCopy,
+                               hardware,
+                               static_cast<size_t>(numSolutions),
+                               query.exclude,
+                               indices);
+        for(auto index : indices)
+        {
+            Status why;
+            if(auto solution = solutionByIndex(query.target.device, hardware, index, why))
+                result.push_back(std::move(solution));
+        }
+        return result;
+    }
+
+    void JitLibrary::beginQuery(const DeviceTarget&      target,
                                 const BackendInfo&       backend,
                                 size_t                   workspace,
-                                std::vector<std::string> excludeKernels,
-                                GenerateMissing          generate)
+                                std::vector<std::string> excludeKernels)
     {
-        auto& query           = activeQuery();
-        query                 = {};
-        query.engaged         = true;
-        query.allowGeneration = allowGeneration;
-        query.target          = target;
-        query.backend         = backend;
-        query.workspace       = workspace;
-        query.exclude         = std::move(excludeKernels);
-        query.generate        = std::move(generate);
+        auto& query     = activeQuery();
+        query           = {};
+        query.engaged   = true;
+        query.target    = target;
+        query.backend   = backend;
+        query.workspace = workspace;
+        query.exclude   = std::move(excludeKernels);
     }
 
     void JitLibrary::endQuery()
@@ -1423,7 +1385,7 @@ namespace hipblaslt_jit
                                      TensileLite::Hardware const&               hardware,
                                      TensileLite::SolutionLibrarySearchType) const
     {
-        auto found = solutionsFor(const_cast<JitLibrary&>(*this), problem, hardware, INT32_MAX, false);
+        auto found = const_cast<JitLibrary*>(this)->solutionsFor(problem, hardware, INT32_MAX);
         TensileLite::SolutionSet<TensileLite::ContractionSolution> result;
         result.insert(found.begin(), found.end());
         return result;
@@ -1452,7 +1414,7 @@ namespace hipblaslt_jit
                                      TensileLite::Hardware const&               hardware,
                                      int                                        numSolutions) const
     {
-        return solutionsFor(const_cast<JitLibrary&>(*this), problem, hardware, numSolutions, true);
+        return const_cast<JitLibrary*>(this)->solutionsFor(problem, hardware, numSolutions);
     }
 
     TensileLite::SolutionVector<TensileLite::ContractionSolution> JitLibrary::findTopSolutionsGroupedGemm(
