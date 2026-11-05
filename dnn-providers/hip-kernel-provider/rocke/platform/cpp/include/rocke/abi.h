@@ -112,8 +112,12 @@ extern "C" {
  * 13: rocke_gemm_trait_spec_t gained the gfx1250 TDM and K-loop fields (tdm,
  *     tdm_depth, ab_load_elem_bytes and its _set flag, split_barrier,
  *     tdm_alternate_issuers, tdm_early_refill), which changes its size and the
- *     layout of every GEMM spec that embeds it. */
-#define ROCKE_ABI_VERSION 13
+ *     layout of every GEMM spec that embeds it.
+ * 14: rocke_rdna_attn_params_t gained block_table_v mid-struct and k_ptr,
+ *     v_ptr and live_rows at its end, which changes its size and field
+ *     offsets; rocke_wmma_fmha_fwd_v2_spec_t gained dense_q and seqused_q in
+ *     the padding after page_block_size (its size and offsets are unchanged). */
+#define ROCKE_ABI_VERSION 14
 
 /* Wire ABI: the CBOR recipe/bundle/guard vocabulary this engine understands.
  * 2: list-tagged ("l") kernel attrs such as cluster_dims; level-1 engines drop them.
