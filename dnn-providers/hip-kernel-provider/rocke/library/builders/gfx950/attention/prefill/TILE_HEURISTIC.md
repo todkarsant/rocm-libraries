@@ -13,8 +13,9 @@ are outcomes at those configurations, not a general claim.
 - [4. Tried and rejected](#4-tried-and-rejected)
 - [5. Method and correctness gate](#5-method-and-correctness-gate)
 - [6. Caveats and honest losses](#6-caveats-and-honest-losses)
-- [7. Reproducing](#7-reproducing)
-- [8. Open items](#8-open-items)
+- [7. The trained ranker](#7-the-trained-ranker)
+- [8. Reproducing](#8-reproducing)
+- [9. Open items](#9-open-items)
 
 ## 1. Why the decision moved
 
@@ -134,7 +135,83 @@ there is no held-out set left to separate a real effect from a fitted one.
 catalog, and the engine declines the first two at graph match. They are not tiles the
 rule declines to pick; they are not present.
 
-## 7. Reproducing
+## 7. The trained ranker
+
+The rule above is the engine's native scorer. A trained UHD catalog ranker was also
+built for the same decision, through the house pipeline (`hipdnn_corpus_gen` ->
+`hipdnn_bench` -> `uhd_gen`), so the two can be compared rather than argued about.
+
+**It ranks the same two knobs.** Of the ten kernel fields the KMD declares, five are
+single-valued across the whole 52-kernel catalog: `batch`, `seqlen_q`, `seqlen_kv`,
+`ragged` and `sliding_window` are the runtime-shape sentinels the catalog collapse left
+behind. Only `block_m`, `block_n`, `causal`, `dtype` and `head_size` vary. The model
+therefore chooses a tile within a cohort, exactly as `preferredTile` does.
+
+**The shape set needed a different source.** corpus_gen's search walks around the
+operation's declared archetypes, and a tile must divide both sequence lengths, so almost
+every proposal is declined and the search saturates. Recorded shapes are passed in
+directly with `--model-shapes` instead. The tool's own suggestion of `--kdp-root` is
+wrong for this engine: it reads shapes back out of the pack's descriptors, and this
+catalog deliberately carries none.
+
+**Two tiers, and the first one was not shippable.** A smoke set of 200 graphs trained a
+model whose mean top-1 regret was 0.0205. It passed every Stage V gate, but over its 22
+held-out graphs it was faster on 9, within one percent on 6 and slower on 7, with a
+median paired time ratio of 0.9957. The mean was carried by two shapes. That is a tie,
+and reporting it as a win would have rested a claim on a sample too small to carry one.
+
+**The standard tier settles it.** 2,200 graphs across two sets, 12,870 measurements, 221
+held out. Mean top-1 regret falls to 0.0017 with a median of 0.0000 and a p95 of 0.0110.
+One of 219 scored problems sits above 5% regret. Top-1 recall is 0.8721 strict and
+0.9406 tie-aware, and top-3 recall is 1.0000, so when the model misses it misses by one
+position. Declared order measures 0.1943 on the same held-out problems.
+
+| | smoke (22 held out) | standard (219 scored) |
+| --- | --- | --- |
+| mean top-1 regret | 0.0205 | 0.0017 |
+| p95 | 0.0818 | 0.0110 |
+| above 5% regret | 3 | 1 |
+| top-1 recall (strict) | 0.5455 | 0.8721 |
+| top-3 recall | 0.9545 | 1.0000 |
+
+**One model per ranking metric.** The same dataset trains a `tflops` ranker and a `time`
+ranker, since the role binds a model per metric. They land within a thousandth of each
+other at 0.0017 and 0.0018 mean top-1 regret, both with top-3 recall 1.0000. Declared
+order measures 0.1943 and 0.2633 against them respectively.
+
+**On device, against this rule.** Offline regret says how well a model ranks a stored
+sweep. Stage V says what the engine actually does, running each held-out graph twice:
+once under the build's tree and once under a tree with the candidate installed. Both
+metrics pass all four gates (`available`, `read`, `winner_records`, `regret`) over 200
+paired graphs with no engine failures.
+
+| | tflops | time |
+| --- | --- | --- |
+| mean time ratio vs this rule | 0.9601 | 0.9629 |
+| faster / within 1% / slower | 103 / 82 / 15 | 96 / 87 / 17 |
+| median ratio | 0.9883 | 0.9919 |
+| best, worst | 0.679, 1.033 | 0.688, 1.068 |
+
+So the ranker is about 4% faster than the rule of §2 on average, improving roughly half
+the graphs, leaving most of the rest indistinguishable, and losing on 15 to 17. Its best
+cases are near 0.68, which is where this rule picks badly.
+
+**Read the spread, not the mean.** The smoke model's mean ratio was 0.9828, which looks
+like a win, but its 22 graphs split 9 faster, 6 within a percent and 7 slower with a
+median of 0.9957, and two shapes carried the mean. That is a tie. The standard model's
+median sits on the winning side, which is the difference between the two.
+
+**Why the tier mattered.** The two differ only in how many graphs were measured, so the
+smoke model was not a worse idea, it was the same idea fitted on too little. Running the
+cheap tier first is what exposed that, and it cost about half an hour of device time to
+learn it rather than shipping a tie.
+
+**What the corpus could not reach.** The shape pool caps out near 800 from the LLM suite
+and the search together, so a denser aligned grid was generated to give the standard tier
+2,000 graphs to cut from. That grid exists for the corpus only and is deliberately not
+the coverage grid of §3, which is the one these measurements are reported against.
+
+## 8. Reproducing
 
 ```bash
 cd dnn-providers/hip-kernel-provider/rocke
@@ -157,10 +234,46 @@ python library/builders/gfx950/attention/prefill/tile_sweep_fit.py sweep.jsonl
 near 1.0 on some future catalog, there is nothing for a heuristic to win and that is
 the finding.
 
-## 8. Open items
+## 9. Open items
 
 - The rocKE dispatcher's `_base_spec` does not yet mirror this rule. That path is not
   load-bearing for production, so it is a consistency fix rather than a perf change.
 - No C++ twin of the rocKE dispatcher exists; that is AICK-2711.
-- The engine ranks natively with no trained model, as every engine in this repository
-  does. If UHD ranker data is wanted later, the sweep output is the training data.
+- The trained rankers of §7 are validated but not installed. What remains is the shipped
+  layout: the house installs under `sort_kernel_catalog/<arch>/<metric>/`, which needs
+  the generator change that binds a per-arch key. On `develop` today the generator still
+  emits `default` for every descriptor engine, so promoting now would ship a path the
+  house has moved off. Stage V ran under `--arch-key default`, which decides where a
+  model installs rather than whether it works, so its verdict holds under `gfx950` too.
+  The manifest gains an `engine.trained_rankers.<arch>` block naming the per-metric UHD
+  ids and a `trained_catalog_sha256`, which is also the retrain trigger: the fingerprint
+  is of the KDP the rankers were trained on, so any catalog add, remove or rename
+  invalidates it. `tools/catalog_fingerprint.py` prints the value.
+- Promotion is additive rather than a replacement. The native UHD carries no
+  `score.metric`, so a trained model installs under its own metric and the native
+  scorer remains the metric-less fallback. Both ids then appear in the role map.
+- 26 of the 12,870 corpus rows carry no decided correctness verdict, which RFC 0019
+  Open Question 19 leaves open per operation. Their timings trained the model without
+  having been shown correct.
+- `ground_truth.py compare --strict` is attempted and blocked on tooling, not on this
+  engine. The sweep behind it does run: 282 shapes end to end through hipDNN, warmup
+  plus three timing rounds plus the correctness phase, every gate green, every served
+  graph carrying a genuine tolerance match against a pytorch reference. That is a
+  correctness result at the hipDNN level, which §3 cannot give because it compares tiles
+  at the rocKE level. Three tooling defects stop the comparison itself:
+  - `tools/sweep.py` reads `doc["metadata"]`, which dnn-benchmarking dropped at
+    `schema_version: 2`. Current HEAD fails silently: the benchmark times all 282 graphs
+    and the driver reports every one `missing`. Only `73fff8a` (2026-09-30) works.
+  - `configs/templates/attention_sdpa_fwd.graph.json` emits no `attn_scale_value`.
+    hipDNN binds an absent scale to 1.0 and torch applies `1/sqrt(d)`, so the two
+    compute different functions and every graph fails correctness. Patching the graphs
+    afterwards fixes the run but breaks `compare`'s semantic-identity check, correctly.
+    A proper fix needs a scale field on `AttentionRequest` and a `${}` placeholder in
+    the template: `value_map` cannot patch a field that is already a placeholder
+    (`ground_truth.py:339`), and every cell field except `mask_type` is one. The
+    template is shared by all three gfx950 attention engines.
+  - The owner's times and hipDNN's are not directly comparable. Per-tile ratios between
+    the two harnesses span 0.72 to 1.31 on identical shapes, which no overhead model
+    explains, so the performance half of the comparison would be unreliable even once
+    it runs. This sweep also autotunes rather than using the heuristic, so it measures
+    what hipDNN can do, not what §2 picks.
