@@ -282,6 +282,36 @@ def test_installed_ctest_entries_get_scoped_environment_contracts(
             == expected_mla_environment
         )
 
+        # The C++ HIP lowering entries are not registered on Windows. Elsewhere
+        # each names the installed rocke_ir_lower_cli, the parity entry also
+        # gets the compiler tools for its hipcc checks, and rocke_pytest leaves
+        # the parity files to it.
+        if os.name == "nt":
+            continue
+        ir_lower_cli = native_artifact("rocke_ir_lower_cli")
+        identity_environment = environment_for(tests, "rocke_hip_source_identity")
+        assert identity_environment["ROCKE_IR_LOWER_CLI"] == ir_lower_cli
+        parity_environment = environment_for(tests, "rocke_hip_lowering_parity")
+        assert (
+            parity_environment.pop("PYTHONPATH") == identity_environment["PYTHONPATH"]
+        )
+        expected_parity_environment = {"ROCKE_IR_LOWER_CLI": ir_lower_cli}
+        if sys.platform == "linux" and rocm_path is not None:
+            expected_parity_environment.update(compiler_environment)
+        assert parity_environment == expected_parity_environment
+        parity = next(
+            test for test in tests if test["name"] == "rocke_hip_lowering_parity"
+        )
+        platform_pytest = next(test for test in tests if test["name"] == "rocke_pytest")
+        for parity_file in (
+            "tests/core/test_hip_lowering_parity.py",
+            "tests/core/test_mma_operand_register_type.py",
+        ):
+            path = f"{test_ctest_rel}{parity_file}"
+            assert path in parity["command"]
+            ignored = platform_pytest["command"].index(path)
+            assert platform_pytest["command"][ignored - 1] == "--ignore"
+
 
 def test_relocated_cmake_consumer_links_lowerer(tmp_path):
     """Run against a fresh build supplied by the host validation lane."""
