@@ -35,14 +35,15 @@ def test_wheel_excludes_source_only_tests(tmp_path):
         build_source / "tensilelite",
         ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
     )
-    for filename in (
-        "pyproject.toml", "MANIFEST.in", "requirements.txt", "setup.py", "release_metadata.py"
-    ):
-        shutil.copyfile(project_root / filename, build_source / filename)
+    # Copy every top-level file so build inputs added later (setup.py,
+    # release_metadata.py, VERSION, ...) cannot drift out of this test's list.
+    for path in project_root.iterdir():
+        if path.is_file():
+            shutil.copyfile(path, build_source / path.name)
     result = subprocess.run(
         [sys.executable, "-c", "from setuptools.build_meta import build_wheel; build_wheel('dist')"],
         cwd=build_source,
-        env=dict(os.environ, ROCM_VERSION="7.2.4"),
+        env=dict(os.environ, ROCM_VERSION="7.2.4", TENSILELITE_ROCM_VERSION="7.2.4"),
         capture_output=True,
         text=True,
     )
