@@ -3,6 +3,7 @@
 
 """Packaging checks for the canonical TensileLite package."""
 
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -34,11 +35,14 @@ def test_wheel_excludes_source_only_tests(tmp_path):
         build_source / "tensilelite",
         ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
     )
-    for filename in ("pyproject.toml", "MANIFEST.in", "requirements.txt"):
+    for filename in (
+        "pyproject.toml", "MANIFEST.in", "requirements.txt", "setup.py", "release_metadata.py"
+    ):
         shutil.copyfile(project_root / filename, build_source / filename)
     result = subprocess.run(
         [sys.executable, "-c", "from setuptools.build_meta import build_wheel; build_wheel('dist')"],
         cwd=build_source,
+        env=dict(os.environ, ROCM_VERSION="7.2.4"),
         capture_output=True,
         text=True,
     )
@@ -46,5 +50,10 @@ def test_wheel_excludes_source_only_tests(tmp_path):
     wheel = next((build_source / "dist").glob("*.whl"))
     with zipfile.ZipFile(wheel) as archive:
         names = archive.namelist()
+        metadata = archive.read(
+            next(name for name in names if name.endswith(".dist-info/METADATA"))
+        ).decode("utf-8")
+    assert "+rocm7.2.4" in metadata
+    assert "Requires-Dist: pandas" in metadata
     assert "tensilelite/resources.py" in names
     assert not any(name.startswith("tensilelite/Tests/unit/source_only/") for name in names)
