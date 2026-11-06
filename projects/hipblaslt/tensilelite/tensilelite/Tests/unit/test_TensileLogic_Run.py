@@ -17,6 +17,23 @@ from tensilelite.TensileLogic.Run import _setup, Check
 class TestSetup:
     """Test _setup function"""
 
+    @pytest.mark.parametrize("requested, expected", [(0, 12), (-1, 12), (4, 4)])
+    def test_setup_jobs_zero_means_the_cpu_budget(self, requested, expected, tmp_path):
+        """--jobs below 1 resolves to the CPU budget; a positive value is kept"""
+        logic_file = tmp_path / "logic.yaml"
+        logic_file.write_text("dummy")
+        args = Mock(Verbose=1, Jobs=requested, CxxCompiler="/usr/bin/g++", CheckAll=True,
+                    CheckOnlyCustomKernels=False, Architecture="all", KnownBugs=None,
+                    LogicPath=str(logic_file))
+        with patch('tensilelite.TensileLogic.Run.parseArguments', return_value=args), \
+             patch('tensilelite.TensileLogic.Run.validateToolchain', return_value="/usr/bin/g++"), \
+             patch('tensilelite.TensileLogic.Run.makeIsaInfoMap', return_value={}), \
+             patch('tensilelite.TensileLogic.Run.assignGlobalParameters'), \
+             patch('tensilelite.TensileLogic.Run.setVerbosity'), \
+             patch('tensilelite.TensileLogic.Run.CPUThreadCount', return_value=12):
+            jobs, *_ = _setup()
+        assert jobs == expected
+
     def test_setup_basic(self):
         """_setup should initialize all components"""
         with patch('tensilelite.TensileLogic.Run.validateToolchain') as mock_validate_toolchain, \
