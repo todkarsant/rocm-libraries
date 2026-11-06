@@ -115,8 +115,8 @@ def conv_implicit_gemm_spec_to_dict(spec: Any) -> Dict[str, Any]:
         # split-K admission); dropped, the engine would build the identity.
         acc_epilogue=_conv_acc_epilogue_to_dict(spec.acc_epilogue),
     )
-    # dtype_* and the vector-size/optional knobs are merge-target additions
-    # (#8624); forward them only when this branch's spec exposes them so the
+    # dtype_* and the vector-size/optional knobs are later spec additions;
+    # forward them only when this branch's spec exposes them so the
     # binding falls back to the engine default otherwise.
     for f in (
         "dtype_a",
