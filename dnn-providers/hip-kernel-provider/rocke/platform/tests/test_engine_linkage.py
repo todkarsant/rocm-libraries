@@ -255,17 +255,27 @@ def test_installed_ctest_entries_get_scoped_environment_contracts(
             in tensor_transforms_command
         )
         expected_tensor_transforms_environment = {"PYTHONPATH": package_root}
+        library_pythonpath = os.pathsep.join(
+            (f"{test_ctest_rel}tests/library", package_root)
+        )
+        expected_runner_environment = {
+            "PYTHONPATH": library_pythonpath,
+        }
         expected_counted_ir_environment = {
-            "PYTHONPATH": f"{test_ctest_rel}tests/library",
+            "PYTHONPATH": library_pythonpath,
             "PYTEST_ADDOPTS": "",
+            "PYTEST_PLUGINS": "",
+            "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
             "ROCKE_EXPLICIT_GATE_RUN": "1",
             "ROCKE_EXPLICIT_GATE_PARTIAL": "0",
             "ROCKE_EXPLICIT_GATE_PREFLIGHT": "",
         }
         expected_counted_isa_environment = {
-            "PYTHONPATH": f"{test_ctest_rel}tests/library",
+            "PYTHONPATH": library_pythonpath,
             "ROCKE_COUNTED_ISA_OPTIONAL": "0",
             "PYTEST_ADDOPTS": "",
+            "PYTEST_PLUGINS": "",
+            "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
             "ROCKE_EXPLICIT_GATE_RUN": "1",
             "ROCKE_EXPLICIT_GATE_PARTIAL": "0",
             "ROCKE_EXPLICIT_GATE_PREFLIGHT": "",
@@ -300,6 +310,14 @@ def test_installed_ctest_entries_get_scoped_environment_contracts(
         assert (
             environment_for(tests, "rocke_library_mla_pytest")
             == expected_mla_environment
+        )
+        assert (
+            environment_for(tests, "rocke_library_runner_contract_pytest")
+            == expected_runner_environment
+        )
+        assert (
+            environment_for(tests, "rocke_library_worker_integration_pytest")
+            == expected_runner_environment
         )
         assert (
             environment_for(tests, "rocke_library_counted_structural_gate")
