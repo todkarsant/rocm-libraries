@@ -14872,63 +14872,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [32, 256, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT32x256x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -15208,63 +15151,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [64, 192, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT64x192x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -15545,63 +15431,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 96, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x96x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -15882,63 +15711,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [32, 384, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT32x384x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -16218,63 +15990,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [32, 512, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT32x512x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_8_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -16554,63 +16269,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 64, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x64x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -16891,63 +16549,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [256, 32, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT256x32x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -17228,63 +16829,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [64, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT64x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -17564,63 +17108,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [64, 256, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT64x256x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -17900,63 +17387,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 192, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x192x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -18237,63 +17667,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [64, 384, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT64x384x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -18573,63 +17946,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [64, 512, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT64x512x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_8_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -18909,63 +18225,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [384, 32, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT384x32x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -19246,63 +18505,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [256, 64, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT256x64x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -19583,63 +18785,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [512, 32, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT512x32x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT8_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -19920,63 +19065,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_8_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -20257,63 +19345,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 256, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x256x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_8_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -20594,63 +19625,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [384, 64, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT384x64x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -20931,63 +19905,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [192, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT192x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -21268,63 +20185,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [384, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT384x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_8_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -21605,63 +20465,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [192, 256, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT192x256x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_8_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -21942,63 +20745,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [512, 64, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT512x64x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT8_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -22279,63 +21025,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [256, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT256x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT8_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -22616,63 +21305,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [256, 256, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT256x256x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT8_8_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -22953,63 +21585,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [64, 320, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT64x320x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_10_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -23290,63 +21865,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 160, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x160x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_10_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -23627,63 +22145,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [64, 448, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT64x448x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_14_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -23964,63 +22425,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 224, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x224x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_14_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -24301,63 +22705,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [256, 96, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT256x96x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -24638,63 +22985,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 320, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x320x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_10_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -24975,63 +23265,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [256, 160, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT256x160x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_10_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -25312,63 +23545,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 448, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x448x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_14_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -25649,63 +23825,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [256, 224, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT256x224x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_14_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -25986,63 +24105,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [192, 64, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT192x64x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -26323,63 +24385,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [96, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT96x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -26659,63 +24664,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [96, 256, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT96x256x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -26995,63 +24943,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [192, 192, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT192x192x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -27332,63 +25223,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [384, 96, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT384x96x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -27669,63 +25503,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [96, 384, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT96x384x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -28005,63 +25782,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [192, 320, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT192x320x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_10_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -28342,63 +26062,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [384, 160, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT384x160x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT6_10_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG64_4_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -28679,63 +26342,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [256, 192, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT256x192x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT8_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -29016,63 +26622,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 384, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x384x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT8_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -29352,63 +26901,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [320, 64, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT320x64x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT10_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -29689,63 +27181,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [160, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT160x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT10_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -30025,63 +27460,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [320, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT320x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT10_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -30362,63 +27740,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [160, 256, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT160x256x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT10_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -30698,63 +28019,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [320, 192, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT320x192x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT10_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -31035,63 +28299,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [160, 384, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT160x384x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT10_6_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -31371,63 +28578,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [448, 64, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT448x64x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT14_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -31708,63 +28858,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [224, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT224x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT14_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -32044,63 +29137,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [448, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT448x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT14_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_8_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -32381,63 +29417,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [224, 256, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT224x256x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT14_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_16_1_WGMXCC1_WQS0
-    threads: [256, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -32717,63 +29696,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [64, 64, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT64x64x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_8_1_WGMXCC1_WQS0
-    threads: [128, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -33054,63 +29976,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [128, 32, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT128x32x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT4_2_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG32_4_1_WGMXCC1_WQS0
-    threads: [128, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
@@ -33391,63 +30256,6 @@ Solutions:
   CUOccupancy: -1
   ClusterBarrier: false
   CodeObjectVersion: '4'
-  CustomKernel:
-    args:
-    - {type: uint32, semantic: GemmInfo}
-    - {type: uint32, semantic: InternalArgs}
-    - {type: uint32, semantic: InternalArgs1}
-    - {type: uint32, semantic: NumWorkGroups}
-    - {type: uint32, semantic: SizeFree0}
-    - {type: uint32, semantic: SizeFree1}
-    - {type: uint32, semantic: SizeFree2}
-    - {type: uint32, semantic: SizeSum}
-    - {type: address, semantic: AddressD}
-    - {type: address, semantic: AddressC}
-    - {type: address, semantic: AddressA}
-    - {type: address, semantic: AddressMXScaleA}
-    - {type: address, semantic: AddressB}
-    - {type: address, semantic: AddressMXScaleB}
-    - {type: address, semantic: AddressWorkspace}
-    - {type: address, semantic: AddressFlags}
-    - {type: uint32, semantic: StrideD0}
-    - {type: uint32, semantic: StrideD1}
-    - {type: uint32, semantic: StrideC0}
-    - {type: uint32, semantic: StrideC1}
-    - {type: uint32, semantic: StrideA0}
-    - {type: uint32, semantic: StrideA1}
-    - {type: uint32, semantic: StrideScaleA0}
-    - {type: uint32, semantic: StrideScaleA1}
-    - {type: uint32, semantic: StrideB0}
-    - {type: uint32, semantic: StrideB1}
-    - {type: uint32, semantic: StrideScaleB0}
-    - {type: uint32, semantic: StrideScaleB1}
-    - {type: uint32, semantic: Alpha}
-    - {type: uint32, semantic: Beta}
-    - {type: uint32, semantic: ItersPerTile}
-    - {type: uint32, semantic: MagicNumberItersPerTile}
-    - {type: uint32, semantic: MagicShiftItersPerTile}
-    - {type: uint32, semantic: SKItersPerWG}
-    - {type: uint32, semantic: SKGrid}
-    - {type: uint32, semantic: SKTilesAndSplit}
-    - {type: address, semantic: AddressScaleAlphaVec}
-    - {type: address, semantic: AddressBias}
-    - {type: uint32, semantic: BiasType}
-    - {type: uint32, semantic: StrideBias}
-    - {type: float32, semantic: ActivationArg}
-    - {type: float32, semantic: ActivationArg, index: 1}
-    - {type: uint32, semantic: ActivationTypeArg}
-    - {type: uint64, semantic: BatchOffsetD}
-    - {type: uint64, semantic: BatchOffsetC}
-    - {type: uint64, semantic: BatchOffsetA}
-    - {type: uint64, semantic: BatchOffsetB}
-    generated: true
-    grid: [PersistentWithBatch, One, One]
-    macrotile: [32, 128, 128]
-    name: Cijk_Alik_Bljk_F8BS_MXAE8B32_MXBE8B32_BH_Bias_HA_S_SAV_UserArgs_MT32x128x128_MI16x16x1_SN_LDSB0_AFC1_AG0_AGGSUA0_AGNTAB0_AFEM1_AFEM1_ASEM32_BL1_BS1_CD1_1_CLR1_CLS0_CADS0_DTLA1_DTLB1_DTLM0_DTVA0_DTVB0_DTVMXSA0_DTVMXSB0_DTVSM0_DPLB0_EPS0_ELFLR0_EMLLn1_FDSI0_GRPM1_GRVWA16_GRVWB16_GSU0_GSUAMB_GLS0_HPLR0_ISA950_ICIW0_IU1_IA0_K1_LDSSI0_LDSTI0_LBSPPA0_LBSPPB0_LBSPPMXSA0_LBSPPMXSB0_LBSPPM0_LPA0_LPB0_LPMXSA0_LPMXSB0_LPM0_LRVWn1_LWPMn1_MIAV0_MIWT2_4_MXLIBL_MXSFHPS_MO64_MGRIPM3_NTn1_NTA0_NTB0_NTC0_NTD0_NTE0_NTG0_NTMXSA0_NTMXSB0_NTM0_NTWS0_NVn1_NVA0_NVB0_NVC0_NVD0_NVE0_NVG0_NVMXSA0_NVMXSB0_NVM0_NVWS0_NEPBS0_NLCA1_NLCB1_ONLL1_PXCCM0_PAP0_PGL0_PGR2_PLR0_PKA1_RAP0_SGROB0_SIA3_SS0_SPO0_SRVW0_SSO0_SVW4_SKFTR0_SNLL0_SIP1_SGRO0_TDMI0_TDMIM0_TDMLWS0_TDMPLB0_TDMS0_TIN0_THn1_THA0_THB0_THC0_THD0_THE0_THG0_THMXSA0_THMXSB0_THM0_THWS0_TPSSK_TLDS1_TLDSMn1_ULSGRO0_USL0_USLMX0_UDFMAC0_UIOFGRO0_UPLRP0_USFGROn1_USI1_VSn1_VWA1_VWB1_WSGRA0_WSGRB0_WS64_WASG_WG16_8_1_WGMXCC1_WQS0
-    threads: [128, 1, 1]
-    workspaceSizePerElemBias: 0
-    workspaceSizePerElemC: 0
-    workspaceType: None
   DepthU: 128
   DirectToLds: 1
   DirectToLdsA: true
