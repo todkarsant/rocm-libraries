@@ -112,7 +112,7 @@ class TestBinaryAbiRefusal(unittest.TestCase):
         """ABI11 tags cover incompatible layouts, not the combined native ABI."""
         from rocke.portable_ir.src import online
 
-        for reports in (8, 9, 10, 11):
+        for reports in (8, 9, 10, 11, 12, 13):
             with (
                 self.subTest(reports=reports),
                 patch.object(online, "_check_source_freshness"),
