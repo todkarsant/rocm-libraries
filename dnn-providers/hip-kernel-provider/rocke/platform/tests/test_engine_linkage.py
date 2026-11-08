@@ -227,6 +227,18 @@ def test_installed_ctest_entries_get_scoped_environment_contracts(
             install_script = (build / "cmake_install.cmake").read_text()
             assert "attention_sdpa_fwd.graph.json" in install_script
             assert "/tests/library/tests/sdpa/hipdnn" in install_script
+        attention_cpu = next(
+            test
+            for test in tests
+            if test["name"] == "rocke_library_attention_cpu_pytest"
+        )
+        attention_command = attention_cpu["command"]
+        marker_at = attention_command.index("not compiler_integration")
+        assert attention_command[marker_at - 1] == "-m"
+        assert any(
+            path.endswith("test_attention_bwd_resources.py")
+            for path in attention_command
+        )
         command = pair["command"]
         native = command[command.index("--native") + 1]
         assert native == native_artifact("rocke_optimization_barrier_emit")

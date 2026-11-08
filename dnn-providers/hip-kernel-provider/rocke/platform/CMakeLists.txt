@@ -828,14 +828,15 @@ if(ROCKE_INSTALL_TESTS)
         "tests/library/tests/test_fmha_mfma_free_stride.py"
         "tests/library/tests/test_sdpa_free_stride_layouts.py"
         "tests/library/tests/test_bwd_memo_bound.py"
-        "tests/library/tests/test_attention_bwd_counted_sync.py")
+        "tests/library/tests/test_attention_bwd_counted_sync.py"
+        "tests/library/tests/test_attention_bwd_resources.py")
     set(_ROCKE_LIBRARY_ATTENTION_CPU_TESTS "")
     foreach(_t ${_ROCKE_LIBRARY_ATTENTION_CPU_TEST_RELPATHS})
       string(APPEND _ROCKE_LIBRARY_ATTENTION_CPU_TESTS
              " \"${ROCKE_TEST_CTEST_REL}${_t}\"")
     endforeach()
     string(APPEND _ROCKE_INSTALLED_CTEST_ENTRIES
-           "add_test(rocke_library_attention_cpu_pytest python -m pytest${_ROCKE_LIBRARY_ATTENTION_CPU_TESTS} -v -rs --timeout=30)\n")
+           "add_test(rocke_library_attention_cpu_pytest python -m pytest -m \"not compiler_integration\"${_ROCKE_LIBRARY_ATTENTION_CPU_TESTS} -v -rs --timeout=30)\n")
     string(APPEND _ROCKE_INSTALLED_CTEST_ENTRIES
            "set_tests_properties(rocke_library_attention_cpu_pytest PROPERTIES\n"
            "  LABELS \"ckc\\;python\\;attention\\;host\\;quick\"\n"
@@ -890,7 +891,7 @@ if(ROCKE_INSTALL_TESTS)
            "add_test(rocke_library_counted_structural_gate python -m pytest -p pytest_timeout \"${ROCKE_TEST_CTEST_REL}tests/library/tests/gates/attention_bwd_counted_structural_gate.py\" -v -rs --timeout=60)\n")
     string(APPEND _ROCKE_INSTALLED_CTEST_ENTRIES
            "set_tests_properties(rocke_library_counted_structural_gate PROPERTIES\n"
-           "  LABELS \"ckc\\;python\\;attention\\;host\\;structural\\;standard\\;comprehensive\\;full\\;hip-kernel-provider\"\n"
+           "  LABELS \"ckc\\;python\\;attention\\;host\\;structural\\;comprehensive\\;full\\;hip-kernel-provider\"\n"
            "  ENVIRONMENT \"PYTHONPATH=${_ROCKE_LIBRARY_PYTHONPATH};PYTEST_ADDOPTS=;PYTEST_PLUGINS=;PYTEST_DISABLE_PLUGIN_AUTOLOAD=1;ROCKE_EXPLICIT_GATE_RUN=1;ROCKE_EXPLICIT_GATE_PARTIAL=0;ROCKE_EXPLICIT_GATE_PREFLIGHT=\"\n"
            "  PROCESSORS 4\n"
            "  RESOURCE_LOCK rocke_counted_sync_gate\n"

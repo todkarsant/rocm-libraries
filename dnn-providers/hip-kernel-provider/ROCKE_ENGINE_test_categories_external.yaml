@@ -16,10 +16,11 @@
 # structural gate must list its cumulative tier ownership explicitly.
 #
 # Most rocKE entries have no tiered variant and remain in quick (therefore in
-# every higher tier through the cascade). The arch-domain reproduction and
-# counted-sync structural gates start at standard; the counted-sync compiler,
-# ISA, and resource gate starts at comprehensive. Their uncategorized
-# installed-tree fallback labels are baked into CMake too.
+# every higher tier through the cascade). The arch-domain reproduction starts
+# at standard. The counted-sync structural and compiler/ISA/resource gates start
+# at comprehensive while the standard hipkernelprovider shards remain at their
+# outer step limit (rocm-libraries #15334). Their uncategorized installed-tree
+# fallback labels are baked into CMake too.
 #
 # The pinned GPU reference entries are regex patterns, unlike the other
 # entries here: rocke/platform/CMakeLists.txt registers
@@ -213,12 +214,11 @@ test_categories:
       - "ckc"
       - "hip-kernel-provider"
 
-  counted-structural-standard:
-    description: "rocKE counted-sync exhaustive host structural gate, standard and higher"
+  counted-structural-comprehensive:
+    description: "rocKE counted-sync exhaustive host structural gate, comprehensive and full"
     test_patterns:
       - "rocke_library_counted_structural_gate"
     labels:
-      - "standard"
       - "comprehensive"
       - "full"
       - "host"
