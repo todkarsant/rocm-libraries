@@ -46,7 +46,9 @@ def _conv_problem_to_dict(p: Any) -> Dict[str, Any]:
         pW=p.pW,
         dH=p.dH,
         dW=p.dW,
-        groups=getattr(p, "groups", 1),
+        # Read directly: a problem without ``groups`` is malformed, not
+        # ungrouped (ConvProblem defaults it to 1 and validates it).
+        groups=p.groups,
     )
     for f in ("Di", "Z", "sD", "pD", "dD"):
         v = getattr(p, f, None)
@@ -57,11 +59,16 @@ def _conv_problem_to_dict(p: Any) -> Dict[str, Any]:
 
 
 def _conv_acc_epilogue_to_dict(epi: Any) -> Dict[str, Any]:
-    """:class:`ConvAccumulatorEpilogue` -> dict (clamp bounds None when unset)."""
+    """:class:`ConvAccumulatorEpilogue` -> dict (clamp bounds None when unset).
+
+    The epilogue's ``__post_init__`` has already type-checked every field
+    (``relu`` a bool, the rest real numbers), so ``relu`` is passed as is and
+    ``float(...)`` only widens a validated int bound to the binding's double.
+    """
     return dict(
         bias=float(epi.bias),
         scale=float(epi.scale),
-        relu=bool(epi.relu),
+        relu=epi.relu,
         clamp_min=None if epi.clamp_min is None else float(epi.clamp_min),
         clamp_max=None if epi.clamp_max is None else float(epi.clamp_max),
     )
@@ -95,7 +102,8 @@ def conv_implicit_gemm_spec_to_dict(spec: Any) -> Dict[str, Any]:
         groups=spec.groups,
         # Changes the emitted kernel and its launch grid; dropped, the engine
         # would build an unmerged kernel under a merged spec's name and grid.
-        group_merge=getattr(spec, "group_merge", 1),
+        # Read directly: a spec without it is malformed, not unmerged.
+        group_merge=spec.group_merge,
         # The split-K forward binary (its own ABI and epilogue) and its cluster
         # form; dropped, the engine would build the plain kernel. Read
         # directly: a spec without them is malformed, not unsplit.
@@ -107,9 +115,15 @@ def conv_implicit_gemm_spec_to_dict(spec: Any) -> Dict[str, Any]:
         # split-K admission); dropped, the engine would build the identity.
         acc_epilogue=_conv_acc_epilogue_to_dict(spec.acc_epilogue),
     )
-    # dtype_* and the vector-size/optional knobs are forwarded only when the
-    # spec sets them (not None), so the binding falls back to the engine
-    # default otherwise.
+    # The vector-size/optional knobs are forwarded only when the spec sets
+    # them (not None), so the binding falls back to the engine default
+    # otherwise.
+    # FIXME: dtype_* are not ImplicitGemmConvSpec fields (dtypes live in
+    # spec.data), so getattr yields None and the binding keeps its fp16
+    # default: backend="cpp" lowers a bf16 spec as fp16. cshuffle_no_alias
+    # and lds_layout are not forwarded either, so cpp drops them too.
+    # Pre-existing; forwarding them changes cpp output and needs its own
+    # parity test.
     for f in (
         "dtype_a",
         "dtype_b",
