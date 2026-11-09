@@ -319,7 +319,7 @@ provider tree; everything else is relative to this directory.
 | Path | |
 |---|---|
 | `<content>/<op>/*.json` | descriptors shared by every target of an op: KMD (metadata schema), UED (engine), UHD (heuristic), UDD (dispatch), UMD (matcher) |
-| `<content>/<op>/flydsl_<op>_engine_estimate.uhd.json` | the engine estimate's (`predict_engine`, L1) `default` slot: a native UHD no scorer registers, so the loader disables it and keeps the engine until a trained model is installed for an arch |
+| `<content>/<op>/flydsl_<op>_engine_estimate.uhd.json` | (every op that owns its engine; the split engine's descriptor-only folder has none, and none is planned) the engine estimate's (`predict_engine`, L1) `default` slot: a native UHD no scorer registers, so the loader disables it and keeps the engine until a trained model is installed for an arch |
 | `<content>/<op>/heuristics/<ued-id>/<role>/<arch>/<metric>/` | a trained UHD as `uhd_gen promote` installs it: `heuristic.uhd.json` and the `model.bin` it names (in DVC). `gen_descriptors.py` binds each under its role and arch key in the op's UED |
 | `<content>/<op>/<target>.SOURCE.md` | the target's readable summary: toolchain, input digest, one row per object |
 | `<content>/<op>/<target>/*.hsaco` | the committed code objects |
