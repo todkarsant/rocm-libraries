@@ -96,7 +96,7 @@ def source_build_id(platform_root: str | Path | None = None) -> str | None:
 
     The ID covers repository-owned inputs that determine the shared engine and
     replay CLI: engine sources/headers, the CLI source, their CMake recipes, and
-    the inputs of the generated arch-domain table.
+    the inputs of the generated arch-domain and C++ keyword tables.
     It is a source/build-recipe ID, not a compiler or binary identity. Installed
     Python packages carry no engine source surface; ``None`` means freshness
     cannot be established locally.
@@ -115,6 +115,8 @@ def source_build_id(platform_root: str | Path | None = None) -> str | None:
         "python/rocke/core/arch/data/arch_domain_waivers.json",
         "python/rocke/core/arch/domain.py",
         "tools/gen_arch_domain_cpp.py",
+        "python/rocke/core/cxx_keywords.py",
+        "tools/gen_cxx_keywords_cpp.py",
         "tests/portable_ir/replay_cli.cpp",
         "CMakeLists.txt",
         "tests/CMakeLists.txt",
