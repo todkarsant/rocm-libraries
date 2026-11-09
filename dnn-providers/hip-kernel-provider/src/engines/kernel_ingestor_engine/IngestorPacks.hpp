@@ -93,6 +93,14 @@ void resetFlydslSdpaCdnaDualwaveModuleCache();
 void registerFlydslSdpaCdnaDecodeSymbols(hipdnn_plugin_sdk::ingestor::SymbolScope<Handle>& scope);
 void resetFlydslSdpaCdnaDecodeModuleCache();
 
+/// @see packs/FlydslSdpaDropoutMaskNative.cpp
+void registerFlydslSdpaDropoutMaskSymbols(hipdnn_plugin_sdk::ingestor::SymbolScope<Handle>& scope);
+void resetFlydslSdpaDropoutMaskModuleCache();
+
+/// @see packs/FlydslSdpaHeadPadNative.cpp
+void registerFlydslSdpaHeadPadSymbols(hipdnn_plugin_sdk::ingestor::SymbolScope<Handle>& scope);
+void resetFlydslSdpaHeadPadModuleCache();
+
 /// @see packs/FlydslSdpaBwdMergedNative.cpp
 void registerFlydslSdpaBwdMergedSymbols(hipdnn_plugin_sdk::ingestor::SymbolScope<Handle>& scope);
 void resetFlydslSdpaBwdMergedModuleCache();

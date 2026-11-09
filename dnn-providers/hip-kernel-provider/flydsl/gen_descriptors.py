@@ -98,9 +98,18 @@ from generators._sdpa_bwd_spec import U2_SYMBOLS, Spec, knobs_of  # noqa: E402
 # Descriptor schema version, as the loader spells it: UKD_VERSION_MAJOR = 1,
 # UKD_VERSION_MINOR = 0 (DescriptorLoader.hpp:288-289).
 DESCRIPTOR_VERSION = "1.0"
-# Ops whose engines read a runtime pass-by-value scalar (the SDPA softmax scale, the
-# RMSNorm epsilon), and the graph schema that introduced such tensors
-# (PluginVersionConstants.hpp, K_PASS_BY_VALUE_MIN_API_VERSION).
+# The graph schema each engine's matcher understands, its UED's `sdk_version`: the ingestor
+# declines a graph whose schema floor (hipDNN's PluginVersionConstants.hpp,
+# computeMinimumEnginePluginApiVersion) is above it before the matcher runs. An op absent
+# here stays at the baseline (1.0.0).
+#
+# * RMSNorm reads a runtime pass-by-value epsilon: K_PASS_BY_VALUE_MIN_API_VERSION, 1.2.0.
+# * The SDPA engines read and gate every field the schema has added through
+#   K_RAGGED_OFFSET_MULTIPLIER_MIN_VERSION, 1.4.0, which is K_MAX_SUPPORTED_API_VERSION:
+#   overridable shapes (1.1.0, declined), runtime pass-by-value tensors (1.2.0), ragged
+#   tensors and declared alignments (1.3.0), ragged offset multipliers (1.4.0). COVERAGE.md's
+#   "Graph schema" lists the gate for each; TestFlydslSdpaObjects pins the claim against the
+#   SDK's maximum, so an SDK that adds a version fails it until those fields are reviewed.
 SDPA_OPS = (
     "sdpa_rdna",
     "sdpa_rdna_decode",
@@ -109,8 +118,13 @@ SDPA_OPS = (
     "sdpa_cdna_decode",
     "sdpa_aiw",
 )
-PASS_BY_VALUE_OPS: tuple[str, ...] = ("rmsnorm",) + SDPA_OPS
 PASS_BY_VALUE_SDK_VERSION = "1.2.0"
+SDPA_SDK_VERSION = "1.4.0"
+SDK_VERSION_BY_OP: dict[str, str] = {
+    "rmsnorm": PASS_BY_VALUE_SDK_VERSION,
+    **{op: SDPA_SDK_VERSION for op in SDPA_OPS},
+}
+
 # The backward engines' matcher reads ragged tensors (1.3.0), non-default tensor alignment
 # (1.3.0) and ragged offset multipliers (1.4.0) straight from the graph, and the ingestor
 # declines a graph whose schema floor is above the engine's before any matcher runs, so both
@@ -214,10 +228,11 @@ SHAPE_KNOBS = {"N", "head_dim", "head_dim_v"}
 #
 # Per op: `N` is RMSNorm's row width; `head_dim`, `head_dim_v` and `causal` are what
 # an SDPA graph asks for, and on CDNA so is the kernel family, which the target arch
-# fixes. `has_bias`, `has_sink` and the bias forms (`bias_f32`, `bias_q`,
-# `bias_kstrided`) are fixed by whether and how the graph adds a bias or a sink. The
+# fixes. `has_bias`, `has_sink`, `has_dropout` and the bias forms (`bias_f32`, `bias_q`,
+# `bias_kstrided`) are fixed by whether and how the graph adds a bias or a sink, or drops
+# attention probabilities. The
 # tier bounds and capability flags (`n_max`, `head_dim_max`, `any_diagonal`,
-# `kv_align`) say which graphs an object can serve: the matcher gates on them, and
+# `kv_align`, `qk_mask`, `v_mask`) say which graphs an object can serve: the matcher gates on them, and
 # autotune compares the objects they distinguish as separate catalog entries. For the
 # SDPA backward, `dropout`, `padded`, `floor` and `dform` are fixed by the graph and the
 # head-size ladder, and `store_db` and `gqa_pack` say which graphs an object serves (a
@@ -241,6 +256,7 @@ GRAPH_DETERMINED_FIELDS = {
     "head_dim_v",
     "head_dim_max",
     "qk_mask",
+    "v_mask",
     "causal",
     "any_diagonal",
     "kv_align",
@@ -249,7 +265,9 @@ GRAPH_DETERMINED_FIELDS = {
     "bias_q",
     "bias_kstrided",
     "has_sink",
+    "has_dropout",
     "merge_symbol",
+    "fill_symbol",
     "kernel",
     "dropout",
     "padded",
@@ -777,14 +795,12 @@ class OpDescriptors:
             "id": self.ued_id,
             "name": f"hipkernel:{self.stem}",
         }
-        # The graph schema the engine's matcher understands: the ingestor declines any
-        # graph whose schema floor is above it. Runtime pass-by-value scalars (1.2.0) are
-        # read by the engines whose scale or epsilon may be one; the rest stay at the
-        # baseline.
-        if self.op in SDPA_BWD_OPS:
+        # The graph schema the engine's matcher understands (SDK_VERSION_BY_OP): the
+        # ingestor declines any graph whose schema floor is above it.
+        if self.op in SDK_VERSION_BY_OP:
+            ued["sdk_version"] = SDK_VERSION_BY_OP[self.op]
+        elif self.op in SDPA_BWD_OPS:
             ued["sdk_version"] = SDPA_BWD_SDK_VERSION
-        elif self.op in PASS_BY_VALUE_OPS:
-            ued["sdk_version"] = PASS_BY_VALUE_SDK_VERSION
         kmd_fields = []
         for name, type_token in self.fields.items():
             field: dict[str, Any] = {"name": name, "type": type_token}
