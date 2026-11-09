@@ -21,9 +21,24 @@ from __future__ import annotations
 from typing import Any, Dict, Optional, Tuple
 
 from rocke.core import GemmLowerResult, import_engine, lower_family, name_of
+from rocke.core.codegen_policy import scheduler_strategy_reason
 
 #: The extension that binds the conv families' C++ mirrors.
 ENGINE_MODULE = "rocke_library_engine"
+
+
+def _reject_unknown_sched(spec: Any, arch: str) -> None:
+    """Refuse a ``spec.sched`` outside :class:`SchedulerStrategy` before either
+    engine runs, with the ValueError the Python builder raises for it.
+
+    Called by every ``lower_*`` whose spec carries ``sched``, so
+    ``backend="cpp"`` fails like ``backend="python"`` instead of surfacing the
+    binding's build error. The ``*_spec_to_dict`` helpers stay unvalidated:
+    the parity tests pass a bad ``sched`` through them to check the C++
+    validator's own refusal."""
+    why = scheduler_strategy_reason(spec.sched)
+    if why is not None:
+        raise ValueError(f"invalid {type(spec).__name__} for {arch}: {why}")
 
 
 def _conv_problem_to_dict(p: Any) -> Dict[str, Any]:
@@ -712,6 +727,7 @@ def lower_conv_direct_fwd_smallc_wmma(
             ir = serialize(k)
         return ll, ir
 
+    _reject_unknown_sched(spec, arch)
     eng = import_engine(ENGINE_MODULE)
     sd = conv_direct_fwd_smallc_wmma_spec_to_dict(spec)
     return lower_family(
@@ -748,6 +764,7 @@ def lower_conv_direct_fwd_smallk_wmma(
             ir = serialize(k)
         return ll, ir
 
+    _reject_unknown_sched(spec, arch)
     eng = import_engine(ENGINE_MODULE)
     sd = conv_direct_fwd_smallk_wmma_spec_to_dict(spec)
     return lower_family(
@@ -820,6 +837,7 @@ def lower_conv_direct_fwd_gstream_wmma(
             ir = serialize(k)
         return ll, ir
 
+    _reject_unknown_sched(spec, arch)
     eng = import_engine(ENGINE_MODULE)
     sd = conv_direct_fwd_gstream_wmma_spec_to_dict(spec)
     return lower_family(
@@ -858,6 +876,7 @@ def lower_conv_direct_fwd_tapouter_wmma(
             ir = serialize(k)
         return ll, ir
 
+    _reject_unknown_sched(spec, arch)
     eng = import_engine(ENGINE_MODULE)
     sd = conv_direct_fwd_tapouter_wmma_spec_to_dict(spec)
     return lower_family(
@@ -894,6 +913,7 @@ def lower_conv_dgrad_patch_wmma(
             ir = serialize(k)
         return ll, ir
 
+    _reject_unknown_sched(spec, arch)
     eng = import_engine(ENGINE_MODULE)
     sd = conv_dgrad_patch_wmma_spec_to_dict(spec)
     return lower_family(
@@ -930,6 +950,7 @@ def lower_conv_dgrad_smallc_wmma(
             ir = serialize(k)
         return ll, ir
 
+    _reject_unknown_sched(spec, arch)
     eng = import_engine(ENGINE_MODULE)
     sd = conv_dgrad_smallc_wmma_spec_to_dict(spec)
     return lower_family(
@@ -966,6 +987,7 @@ def lower_conv_direct_dgrad_wmma(
             ir = serialize(k)
         return ll, ir
 
+    _reject_unknown_sched(spec, arch)
     eng = import_engine(ENGINE_MODULE)
     sd = conv_direct_dgrad_wmma_spec_to_dict(spec)
     return lower_family(
@@ -1002,6 +1024,7 @@ def lower_conv_direct_fwd_wmma(
             ir = serialize(k)
         return ll, ir
 
+    _reject_unknown_sched(spec, arch)
     eng = import_engine(ENGINE_MODULE)
     sd = conv_direct_fwd_wmma_spec_to_dict(spec)
     return lower_family(
@@ -1159,6 +1182,7 @@ def lower_conv_winograd_gemm_wmma(
             ir = serialize(k)
         return ll, ir
 
+    _reject_unknown_sched(spec, arch)
     eng = import_engine(ENGINE_MODULE)
     sd = conv_winograd_gemm_wmma_spec_to_dict(spec)
     return lower_family(
