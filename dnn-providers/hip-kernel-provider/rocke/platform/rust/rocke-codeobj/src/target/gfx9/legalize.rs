@@ -43,7 +43,9 @@ pub fn run(f: &mut MFunc) {
         let mut out = Vec::with_capacity(block.insts.len());
         let mut cache = Literals { reuse: reuse && block.loop_depth > 0, held: Vec::new(), copies: copy_reuse && block.loop_depth > 0, copied: Vec::new() };
         for inst in block.insts.drain(..) {
+            let (start, loc) = (out.len(), inst.loc);
             legalize(f, inst, &mut out, &mut cache);
+            inherit_loc(&mut out, start, loc);
         }
         block.insts = out;
     }

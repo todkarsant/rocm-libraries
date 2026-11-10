@@ -292,7 +292,8 @@ impl<const N: usize> std::fmt::Debug for Opnds<N> {
 }
 
 pub type Defs = Opnds<2>;
-pub type Uses = Opnds<4>;
+/// Five: gfx950's block-scaled MFMA reads A, B, C and its two scale VGPRs.
+pub type Uses = Opnds<5>;
 
 #[derive(Clone, Debug)]
 pub struct MInst {
@@ -305,6 +306,21 @@ pub struct MInst {
     /// The global memory a VMEM access may touch: `alias::ANY`, or the tag
     /// of the `noalias` kernel argument its address is based on.
     pub mem: u16,
+    /// The source location of the IR op the instruction was selected for:
+    /// an index into `MFunc::locs` plus one, or `NO_LOC`. Passes that copy
+    /// an instruction keep it; instructions they make start without one
+    /// (`crate::srcloc` gives those the location of the code they serve).
+    pub loc: u32,
+}
+
+pub const NO_LOC: u32 = 0;
+
+/// Gives the instructions a rewrite pushed since `start` that have no
+/// location the location `loc` of the instruction they replace.
+pub fn inherit_loc(out: &mut [MInst], start: usize, loc: u32) {
+    for inst in out[start..].iter_mut().filter(|i| i.loc == NO_LOC) {
+        inst.loc = loc;
+    }
 }
 
 impl MInst {
@@ -316,6 +332,7 @@ impl MInst {
             imm: 0,
             mods: 0,
             mem: super::alias::ANY,
+            loc: NO_LOC,
         }
     }
 
@@ -359,6 +376,17 @@ pub struct MFunc {
     /// AGPRs the allocation may use when fewer than the target's (the
     /// kernel's `agpr_alloc`).
     pub agpr_limit: Option<u32>,
+    /// The kernel orders its LDS DMA with explicit waits and barriers (its
+    /// `lds_dma_explicit`), so LDS accesses do not wait for DMA loads.
+    pub lds_dma_explicit: bool,
+    /// M0 writes move up to cover H12's wait state (the kernel's
+    /// `m0_early`, `target::gfx9::m0_early`).
+    pub m0_early: bool,
+    /// The optional passes the kernel's attributes turn on.
+    pub passes: super::ast::Passes,
+    /// The distinct op locations instructions point at (`MInst::loc`);
+    /// empty when the IR has no `@loc`.
+    pub locs: Vec<super::ast::Loc>,
 }
 
 impl MFunc {

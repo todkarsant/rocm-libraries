@@ -18,7 +18,7 @@ use std::borrow::Cow;
 
 use std::hash::Hasher;
 
-use super::ast::{Attr, Kernel, Op, OpKind, Operands, Param, Region, Results, Scalar, Text, Type, ValueDef, ValueId};
+use super::ast::{Attr, Kernel, Loc, Op, OpKind, Operands, Param, Passes, Region, Results, Scalar, Text, Type, ValueDef, ValueId};
 use super::hashcons::{key_hash, ConstTable};
 use super::scan::{self, Level, Masks};
 use super::scan_line::{canonical_with, const_key_with};
@@ -686,34 +686,48 @@ fn flat_attrs(text: &str) -> Option<(Vec<(Text, Attr)>, usize)> {
 }
 
 /// Attributes after an operand list, and the `@loc` or nothing after them.
-fn scan_tail(tail: &str, depth: u32) -> Result<Vec<(Text, Attr)>, CompileError> {
+fn scan_tail(tail: &str, depth: u32) -> Result<(Vec<(Text, Attr)>, Option<Loc>), CompileError> {
     let tail = trim(tail);
-    if let Some((attrs, used)) = flat_attrs(tail) {
-        let rest = trim(&tail[used..]);
-        if !(rest.is_empty() || rest.starts_with("@loc")) {
-            return Err(err(format!("unexpected trailing text {rest:?}")));
-        }
-        return Ok(attrs);
-    }
-    if tail.starts_with('{') {
+    let (attrs, rest) = if let Some((attrs, used)) = flat_attrs(tail) {
+        (attrs, trim(&tail[used..]))
+    } else if tail.starts_with('{') {
         let mut scanner = Scanner::new(tail);
         let attrs = parse_attr_map(&mut scanner, depth)?;
-        let rest = trim(scanner.rest());
-        if !(rest.is_empty() || rest.starts_with("@loc")) {
-            return Err(err(format!("unexpected trailing text {rest:?}")));
-        }
-        Ok(attrs)
-    } else if !(tail.is_empty() || tail.starts_with("@loc")) {
-        Err(err(format!("unexpected trailing text {tail:?}")))
+        (attrs, trim(scanner.rest()))
     } else {
-        Ok(Vec::new())
+        (Vec::new(), tail)
+    };
+    if !(rest.is_empty() || rest.starts_with("@loc")) {
+        return Err(err(format!("unexpected trailing text {rest:?}")));
     }
+    Ok((attrs, loc_text(rest)))
+}
+
+/// The unescaped string of a printed `@loc "..."`; other `@loc` forms
+/// carry no chain the back end reads.
+fn loc_text(rest: &str) -> Option<Loc> {
+    let quoted = trim(rest.strip_prefix("@loc")?).strip_prefix('"')?;
+    let mut text = String::with_capacity(quoted.len());
+    let mut chars = quoted.chars();
+    loop {
+        match chars.next()? {
+            '"' => break,
+            '\\' => match chars.next()? {
+                'n' => text.push('\n'),
+                't' => text.push('\t'),
+                c => text.push(c),
+            },
+            c => text.push(c),
+        }
+    }
+    (!text.is_empty()).then(|| text.into())
 }
 
 pub(super) struct ScannedOp<'a> {
     pub kind: OpKind,
     pub opname: &'a str,
     pub attrs: Vec<(Text, Attr)>,
+    pub loc: Option<Loc>,
 }
 
 /// Scans one op line: the kind, each operand through `operand` (in order,
@@ -741,11 +755,11 @@ pub(super) fn scan_op<'a>(
             operands.push(operand(&names[start..end], opname)?);
             start = end + 2;
         }
-        let attrs = scan_tail(parts.tail, depth)?;
+        let (attrs, loc) = scan_tail(parts.tail, depth)?;
         if let Some(result) = parts.result {
             results.push(result);
         }
-        return Ok(ScannedOp { kind, opname, attrs });
+        return Ok(ScannedOp { kind, opname, attrs, loc });
     }
 
     let paren = find_spaced(line, '(').ok_or_else(|| err(format!("op line without operand list: {line:?}")))?;
@@ -775,7 +789,7 @@ pub(super) fn scan_op<'a>(
         start = end + 1;
     }
 
-    let attrs = scan_tail(&after[close + 1..], depth)?;
+    let (attrs, loc) = scan_tail(&after[close + 1..], depth)?;
 
     if !results_text.is_empty() {
         for entry in split_top(results_text) {
@@ -785,7 +799,7 @@ pub(super) fn scan_op<'a>(
             results.push((trim(&entry[..colon]), ty));
         }
     }
-    Ok(ScannedOp { kind, opname, attrs })
+    Ok(ScannedOp { kind, opname, attrs, loc })
 }
 
 /// The induction variable name and the iteration arguments of an `scf.for`
@@ -838,6 +852,9 @@ pub(super) struct Prologue<'a> {
     pub max_workgroup_size: u32,
     pub waves_per_eu: (u32, u32),
     pub agpr_limit: Option<u32>,
+    pub lds_dma_explicit: bool,
+    pub m0_early: bool,
+    pub passes: Passes,
     /// Parameter names without the `%`, their types, and whether they are
     /// `noalias` and `readonly`.
     pub params: Vec<(&'a str, Type, bool, bool)>,
@@ -876,6 +893,9 @@ pub(super) fn prologue<'a>(lines: &mut Lines<'a>) -> Result<Prologue<'a>, Compil
     let mut max_workgroup_size = 1024u32;
     let mut waves_per_eu = (0u32, 0u32);
     let mut agpr_limit = None;
+    let mut lds_dma_explicit = false;
+    let mut m0_early = false;
+    let mut passes = Passes::default();
     if let Some(attrs_line) = lines.peek().filter(|line| line.starts_with("attrs ")) {
         lines.next()?;
         let mut scanner = Scanner::new(&attrs_line["attrs ".len()..]);
@@ -887,6 +907,16 @@ pub(super) fn prologue<'a>(lines: &mut Lines<'a>) -> Result<Prologue<'a>, Compil
                 // Tells the LLVM lowering to scope LDS accesses per allocation, so that a read waits only
                 // for the LDS DMA into its own allocation; the gfx950 waitcnt pass's LDS tags always do.
                 ("lds_alias_scopes", Attr::Bool(_)) => {}
+                // The ops carry `@loc`s; their presence alone turns on the debug sections.
+                ("debug_info", Attr::Bool(_)) => {}
+                // The kernel orders its LDS DMA with explicit waits and barriers.
+                ("lds_dma_explicit", Attr::Bool(b)) => lds_dma_explicit = b,
+                // M0 writes move up to cover H12's wait state.
+                ("m0_early", Attr::Bool(b)) => m0_early = b,
+                // The optional passes (`ast::Passes`).
+                (name, Attr::Bool(b)) if Passes::NAMES.contains(&name) => {
+                    passes.set(name, b);
+                }
                 // An occupancy hint, `n` or `[min, max]` waves per SIMD.
                 ("waves_per_eu", Attr::Int(n)) if (0..=16).contains(&n) => waves_per_eu = (n as u32, n as u32),
                 ("waves_per_eu", Attr::List(range)) => match range[..] {
@@ -930,7 +960,7 @@ pub(super) fn prologue<'a>(lines: &mut Lines<'a>) -> Result<Prologue<'a>, Compil
         }
         params.push((pname, ty, noalias, readonly));
     }
-    Ok(Prologue { name, max_workgroup_size, waves_per_eu, agpr_limit, params })
+    Ok(Prologue { name, max_workgroup_size, waves_per_eu, agpr_limit, lds_dma_explicit, m0_early, passes, params })
 }
 
 /// One definition of a name: the value, the scope it was made in, the
@@ -1224,6 +1254,7 @@ impl<'a> Parser<'a> {
             attrs: scanned.attrs,
             regions: Vec::new(),
             block_args: Vec::new(),
+            loc: scanned.loc,
         };
         if op.kind == OpKind::For {
             self.names.enter();
@@ -1295,6 +1326,9 @@ fn parse_sequential(text: &str, hashcons: bool) -> Result<Kernel, CompileError> 
         wave: 32,
         vgpr_limit: None,
         agpr_limit: prologue.agpr_limit,
+        lds_dma_explicit: prologue.lds_dma_explicit,
+        m0_early: prologue.m0_early,
+        passes: prologue.passes,
         params,
         body,
         values: parser.names.values,
@@ -1444,6 +1478,22 @@ mod tests {
             assert_eq!(scan_owned(line), scan_owned(&slow_line), "{line:?}");
         }
         assert!(fast >= 10, "{fast}");
+    }
+
+    /// A printed `@loc "..."` is kept unescaped; constants that differ only
+    /// in it share one hash-cons key, on both scans.
+    #[test]
+    fn printed_locs_are_kept_and_constants_ignore_them() {
+        assert_eq!(loc_text("@loc \"a\\\\;b.py:1:2:f;c.py:3\"").as_deref(), Some("a\\;b.py:1:2:f;c.py:3"));
+        assert_eq!(loc_text("@loc \"q\\\"n\\tt\"").as_deref(), Some("q\"n\tt"));
+        for other in ["@loc(\"a.py\":3)", "@loc(x)", "@loc \"unterminated", "@loc \"\""] {
+            assert_eq!(loc_text(other), None, "{other}");
+        }
+        let line = "%c : i32 = arith.constant (  ) { ity = s:\"i32\", value = i:1 } @loc \"a.py:1:1:f\"";
+        let key = " : i32 = arith.constant (  ) { ity = s:\"i32\", value = i:1 }";
+        assert_eq!(super::super::hashcons::const_key(line), Some(("%c", key)));
+        let masks = super::super::scan_line::masks(Level::detect(), line);
+        assert_eq!(const_key_with(line, masks.as_ref()), Some(("%c", key)));
     }
 
     /// Wherever the flat-map fast path answers, it answers as the general parser.
@@ -1681,6 +1731,7 @@ mod tests {
                 attrs: scanned.attrs,
                 regions: Vec::new(),
                 block_args: Vec::new(),
+                loc: scanned.loc,
             };
             if op.kind == OpKind::For {
                 self.names.enter();
@@ -1751,6 +1802,9 @@ mod tests {
             wave: 32,
             vgpr_limit: None,
             agpr_limit: prologue.agpr_limit,
+            lds_dma_explicit: prologue.lds_dma_explicit,
+            m0_early: prologue.m0_early,
+            passes: prologue.passes,
             params,
             body,
             values: parser.names.values,
