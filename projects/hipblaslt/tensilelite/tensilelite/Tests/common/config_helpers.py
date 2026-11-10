@@ -94,32 +94,8 @@ def markNamed(name):
 
 
 def _usingStinkytofuBackend(availableArchs):
-    """Return True when kernels for this config will be built on stinkytofu.
-
-    Checked in order:
-      1. ``ROCISA_BACKEND`` set -> True iff it is ``stinkytofu``.
-      2. Unset + no gfx1250 target -> False (only gfx1250 routes to stinkytofu).
-      3. Unset + gfx1250 target -> True iff rocisa has swapped in the stinkytofu
-         adaptor (a native fallback stays native -> False).
-    """
-    backend = os.environ.get("ROCISA_BACKEND", "").strip().lower()
-    if backend:
-        return backend == "stinkytofu"
-
-    if not any("gfx1250" in arch for arch in availableArchs):
-        return False
-
-    try:
-        import rocisa
-    except Exception:
-        return False
-
-    # Read the already-loaded module instead of probing for the standalone
-    # stinkytofu binding: importing _stinkytofu.so alongside native _rocisa.so in
-    # one process registers the same nanobind types twice and aborts the process.
-    # When stinkytofu is unavailable rocisa never swaps the adaptor in, so the
-    # native fallback is already covered by this check returning False.
-    return "rocisa_stinkytofu_adaptor" in (getattr(rocisa, "__file__", "") or "")
+    """Native rocisa is the only backend, so no config is built on stinkytofu."""
+    return False
 
 
 def configMarks(filepath, rootDir, availableArchs, deviceTags=()):

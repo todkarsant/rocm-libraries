@@ -223,8 +223,8 @@ def ParallelMap2(
     threadCount = CPUThreadCount(enable)
     objects = list(objects)
     threadCount = min(threadCount, max(len(objects), 1))
-    # One task would stay in this process. A native-rocisa handoff needs a new
-    # interpreter so it imports rocisa under ROCISA_BACKEND=rocisa.
+    # One task would stay in this process. A worker handoff needs a new
+    # interpreter so it re-imports rocisa cleanly.
     if spawn_worker:
         threadCount = max(threadCount, 2)
 
