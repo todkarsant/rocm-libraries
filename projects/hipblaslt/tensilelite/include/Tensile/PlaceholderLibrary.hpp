@@ -26,16 +26,23 @@
 
 #pragma once
 
+#include <Tensile/CachingLibrary.hpp>
 #include <Tensile/Debug.hpp>
+#include <Tensile/ExactLogicLibrary.hpp>
 #include <Tensile/MasterSolutionLibrary.hpp>
+#include <Tensile/PredictionLibrary.hpp>
 #include <Tensile/SolutionLibrary.hpp>
 #include <Tensile/Tensile.hpp>
 
 #include <algorithm>
+#include <atomic>
+#include <cctype>
 #include <iterator>
 #include <map>
 #include <mutex>
 #include <set>
+#include <string>
+#include <vector>
 
 #include <tensilelitehost/export.h>
 
@@ -158,10 +165,97 @@ namespace TensileLite
         return "";
     }
 
+    /// `filePrefix` without the CU-count and chip-ID parts the library build puts
+    /// before the architecture: library files with equal keys hold the same
+    /// problem type for the same architecture.
+    inline std::string libraryProblemTypeKey(std::string const& filePrefix)
+    {
+        auto const archPos = filePrefix.rfind('_');
+        if(archPos == std::string::npos)
+            return filePrefix;
+
+        std::string head = filePrefix.substr(0, archPos);
+        auto        drop = [&head](std::string const& tag, bool hex) {
+            auto const pos = head.rfind('_');
+            if(pos == std::string::npos)
+                return;
+            auto const part = head.substr(pos + 1);
+            if(part.size() <= tag.size() || part.compare(0, tag.size(), tag) != 0)
+                return;
+            for(size_t i = tag.size(); i < part.size(); i++)
+            {
+                unsigned char const c = part[i];
+                if(!(hex ? (std::isxdigit(c) || c == '-') : std::isdigit(c)))
+                    return;
+            }
+            head.resize(pos);
+        };
+        drop("ID", true);
+        drop("CU", false);
+        return head + filePrefix.substr(archPos);
+    }
+
+    // Calls visit(library, kind) for the library of every row of the Problem
+    // library `library` is (rows that are Problem libraries themselves are
+    // descended into instead).
+    template <typename MyProblem, typename MySolution, typename Visit>
+    void forEachProblemRow(std::shared_ptr<SolutionLibrary<MyProblem, MySolution>> const& library,
+                           Visit&&                                                        visit)
+    {
+        auto const* problemRows
+            = dynamic_cast<ProblemSelectionLibrary<MyProblem, MySolution> const*>(
+                withoutCache(library).get());
+        if(problemRows == nullptr)
+            return;
+
+        for(size_t i = 0; i < problemRows->rows.size(); i++)
+        {
+            auto const& rowLibrary = problemRows->rows[i].second;
+            if(dynamic_cast<ProblemSelectionLibrary<MyProblem, MySolution> const*>(
+                   withoutCache(rowLibrary).get()))
+                forEachProblemRow(rowLibrary, visit);
+            else
+                visit(rowLibrary, problemRows->rowKind(i));
+        }
+    }
+
+    template <typename MyProblem, typename MySolution>
+    struct PlaceholderLibrary;
+
+    /// The placeholders of one master library, by file prefix.
+    template <typename MyProblem, typename MySolution>
+    struct PlaceholderRegistry
+    {
+        std::map<std::string, PlaceholderLibrary<MyProblem, MySolution> const*> byPrefix;
+
+        /// The libraries of the Equality rows of the files whose problem-type key
+        /// is that of `filePrefix`, in file-prefix order. Loads those files.
+        std::vector<std::shared_ptr<SolutionLibrary<MyProblem, MySolution>>>
+            equalityLibraries(std::string const& filePrefix) const
+        {
+            std::vector<std::shared_ptr<SolutionLibrary<MyProblem, MySolution>>> libraries;
+            auto const key = libraryProblemTypeKey(filePrefix);
+            for(auto const& entry : byPrefix)
+            {
+                if(libraryProblemTypeKey(entry.first) != key)
+                    continue;
+                forEachProblemRow(entry.second->loadedLibrary(),
+                                  [&libraries](auto const& rowLibrary, LibraryRowKind kind) {
+                                      if(kind == LibraryRowKind::EqualityMatching)
+                                          libraries.push_back(rowLibrary);
+                                  });
+            }
+            return libraries;
+        }
+    };
+
     template <typename MyProblem, typename MySolution = typename MyProblem::Solution>
     struct PlaceholderLibrary : public SolutionLibrary<MyProblem, MySolution>
     {
         mutable std::shared_ptr<SolutionLibrary<MyProblem, MySolution>> library;
+        // `library` once adopted, for routeYield and returnsNothing, which never
+        // load it and so must not read `library` while another thread loads it.
+        mutable std::atomic<SolutionLibrary<MyProblem, MySolution> const*> adoptedLibrary{nullptr};
         mutable std::set<std::string>*                                  loadedFiles;
         mutable SolutionMap<MySolution>*                                masterSolutions;
         mutable std::mutex*                                             solutionsGuard;
@@ -180,6 +274,9 @@ namespace TensileLite
         mutable std::map<std::string, std::shared_ptr<SolutionLibrary<MyProblem, MySolution>>>*
             indexLoadedLibraries;
 
+        // The registry of the master this placeholder belongs to.
+        std::shared_ptr<PlaceholderRegistry<MyProblem, MySolution>> placeholders;
+
         PlaceholderLibrary() = default;
 
         // Loads the shard the first time it is needed and returns the published
@@ -193,6 +290,9 @@ namespace TensileLite
                 auto        newLibrary = LoadLibraryFile<MyProblem, MySolution>(path);
                 auto        mLibrary
                     = static_cast<MasterSolutionLibrary<MyProblem, MySolution>*>(newLibrary.get());
+                // Results are cached by the master that reaches this placeholder;
+                // the shard's own cache would only hold the same entries again.
+                auto shard = withoutCache(mLibrary->library);
 
                 // Indexed shards publish solutions later; stamp the name on
                 // the cache so it is applied as each one is parsed.
@@ -220,7 +320,7 @@ namespace TensileLite
                     {
                         // Adopting the tree the master loaded means adopting the
                         // cache the master already published; ours is dropped.
-                        published = adopted->second;
+                        published = withoutCache(adopted->second);
 
                         if(Debug::Instance().printCodeObjectInfo())
                             std::cout << "load placeholder library " << filePrefix
@@ -253,7 +353,14 @@ namespace TensileLite
                                           << mLibrary->solutions.size()
                                           << " solutions loaded" << std::endl;
                         }
-                        published = mLibrary->library;
+                        else
+                        {
+                            // Searches return solutions as loaded, without
+                            // stamping the code object name on each result.
+                            for(auto const& entry : mLibrary->solutions)
+                                entry.second->codeObjectFilename = getCodeObjectFileName();
+                        }
+                        published = std::move(shard);
                     }
 
                     beforeLibraryRegistered();
@@ -270,13 +377,41 @@ namespace TensileLite
 
                 // Stored after this load has registered the shard. The hook runs
                 // immediately after that store.
-                library = std::move(published);
+                adopt(std::move(published));
                 afterLibraryPublished();
             });
 
             return library;
         }
 
+        /// The library this placeholder stands for, loaded first if it is not yet.
+        std::shared_ptr<SolutionLibrary<MyProblem, MySolution>> loadedLibrary() const
+        {
+            return loadPlaceholderLibrary();
+        }
+
+    private:
+        // Publishes `shard` once the bank-mode Prediction libraries in it can
+        // reach the Equality rows of their problem type.
+        void adopt(std::shared_ptr<SolutionLibrary<MyProblem, MySolution>> shard) const
+        {
+            if(placeholders && Debug::Instance().useTilewright())
+            {
+                forEachProblemRow(shard, [this](auto const& rowLibrary, LibraryRowKind) {
+                    auto prediction = std::dynamic_pointer_cast<
+                        ProblemPredictionLibrary<MyProblem, MySolution>>(rowLibrary);
+                    if(prediction && prediction->tilewright_bank)
+                        prediction->tilewright_bank_sources
+                            = [registry = placeholders, prefix = filePrefix]() {
+                                  return registry->equalityLibraries(prefix);
+                              };
+                });
+            }
+            library = std::move(shard);
+            adoptedLibrary.store(library.get(), std::memory_order_release);
+        }
+
+    public:
         std::string getCodeObjectFileName() const
         {
             return filePrefix + ".co";
@@ -288,12 +423,7 @@ namespace TensileLite
         {
             auto lib = loadPlaceholderLibrary();
 
-            auto solution = lib->getSolutionByIndex(problem, hardware, index);
-
-            if(solution)
-                solution->codeObjectFilename = getCodeObjectFileName();
-
-            return solution;
+            return lib->getSolutionByIndex(problem, hardware, index);
         }
 
         virtual std::shared_ptr<MySolution> findBestSolution(MyProblem const& problem,
@@ -303,12 +433,7 @@ namespace TensileLite
         {
             auto lib = loadPlaceholderLibrary();
 
-            auto solution = lib->findBestSolution(problem, hardware, fitness);
-
-            if(solution)
-                solution->codeObjectFilename = getCodeObjectFileName();
-
-            return solution;
+            return lib->findBestSolution(problem, hardware, fitness);
         }
 
         /**
@@ -325,14 +450,7 @@ namespace TensileLite
         {
             auto lib = loadPlaceholderLibrary();
 
-            auto solutions = lib->findAllSolutions(problem, hardware, searchType);
-
-            for(auto& solution : solutions)
-            {
-                solution->codeObjectFilename = getCodeObjectFileName();
-            }
-
-            return solutions;
+            return lib->findAllSolutions(problem, hardware, searchType);
         }
 
         virtual SolutionSet<MySolution>
@@ -343,14 +461,7 @@ namespace TensileLite
         {
             auto lib = loadPlaceholderLibrary();
 
-            auto solutions = lib->findAllSolutionsGroupedGemm(problems, hardware, searchType);
-
-            for(auto& solution : solutions)
-            {
-                solution->codeObjectFilename = getCodeObjectFileName();
-            }
-
-            return solutions;
+            return lib->findAllSolutionsGroupedGemm(problems, hardware, searchType);
         }
 
         virtual SolutionVector<MySolution> findTopSolutions(MyProblem const& problem,
@@ -359,14 +470,20 @@ namespace TensileLite
         {
             auto lib = loadPlaceholderLibrary();
 
-            auto solutions = lib->findTopSolutions(problem, hardware, numSolutions);
+            return lib->findTopSolutions(problem, hardware, numSolutions);
+        }
 
-            for(auto& solution : solutions)
-            {
-                solution->codeObjectFilename = getCodeObjectFileName();
-            }
+        /// Some until the library is loaded: asking never loads it.
+        virtual RouteYield routeYield(unsigned route) const override
+        {
+            auto const* loaded = adoptedLibrary.load(std::memory_order_acquire);
+            return loaded != nullptr ? loaded->routeYield(route) : RouteYield::Some;
+        }
 
-            return solutions;
+        virtual bool returnsNothing(MyProblem const& problem, unsigned route) const override
+        {
+            auto const* loaded = adoptedLibrary.load(std::memory_order_acquire);
+            return loaded != nullptr && loaded->returnsNothing(problem, route);
         }
 
         virtual SolutionVector<MySolution>
@@ -376,13 +493,7 @@ namespace TensileLite
         {
             auto lib = loadPlaceholderLibrary();
 
-            auto solutions = lib->findTopSolutionsGroupedGemm(problems, hardware, numSolutions);
-
-            for(auto& solution : solutions)
-            {
-                solution->codeObjectFilename = getCodeObjectFileName();
-            }
-            return solutions;
+            return lib->findTopSolutionsGroupedGemm(problems, hardware, numSolutions);
         }
 
         static std::string Type()
