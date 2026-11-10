@@ -90,6 +90,7 @@ from ..Toolchain.Component import Assembler
 from ..Components.CustomSchedule import hasCustomSchedule
 
 from ..Component import TensorDataMover
+from ..Components.TDMStore import tdmStoreLdsBytes, tdmStoreRejectReason
 from ..Components.TensorDataMover import TensorDataMoverLoad
 from .Utilities import TDM_PAD_INTERVAL_LIMIT, isSubtileIterateMode, reject, roundupRatio, pvar
 from .Validators.MXScaleFormat import validateMXScaleFormatCombination
@@ -3713,6 +3714,14 @@ class Solution(collections.abc.Mapping):
         printRejectionReason):
       return
 
+    if state["TDMStore"] and not isaInfoMap[isa].asmCaps["HasTDM"]:
+      reject(state, printRejectionReason, "TDMStore requires asmCaps HasTDM")
+      return
+    tdmStoreReject = tdmStoreRejectReason(state)
+    if tdmStoreReject:
+      reject(state, printRejectionReason, tdmStoreReject)
+      return
+
     tdmInst: int = state["TDMInst"]
     state["enableTDMA"] = bool(tdmInst & 0x01)
     state["enableTDMB"] = bool(tdmInst & 0x02)
@@ -7173,6 +7182,9 @@ class Solution(collections.abc.Mapping):
           reject(state, printRejectionReason, "reject to reduce number of kernels")
         elif state["VectorWidthA"] > 1:
           reject(state, printRejectionReason, "reject to reduce number of kernels")
+      # tdmStoreRejectReason accepts the auto value; check the width it resolved to.
+      if state["TDMStore"] and state["StoreRemapVectorWidth"]:
+        reject(state, printRejectionReason, "TDMStore does not support StoreRemapVectorWidth")
 
     # GuaranteeNoPartial
     # UseSubtileImpl does its own edge masking (see Components/Subtile), so mark
@@ -7433,12 +7445,14 @@ class Solution(collections.abc.Mapping):
       and not state["ProblemType"]["Gradient"])
     state["_SeparateEpilogueLds"] = bool(
       state["_PersistentVectorEpilogueLds"] and state["PrefetchAcrossPersistent"])
-    if state["_SeparateEpilogueLds"]:
-      epilogueOffset = int(math.ceil(ldsNumBytes / 16) * 16)
+    tdmStoreBytes = tdmStoreLdsBytes(state)
+    if state["_SeparateEpilogueLds"] or (tdmStoreBytes and epilogueSize):
+      # Every TDM store batch reads the vectors while the D tile is staged from offset 0.
+      epilogueOffset = int(math.ceil((tdmStoreBytes or ldsNumBytes) / 16) * 16)
       state["LdsOffsetBias"] = epilogueOffset
       state["LdsOffsetBiasNonGSU"] = epilogueOffset
       state["LdsOffsetBiasGSU"] = epilogueOffset
-    ldsNumBytes = max(ldsNumBytes, state["LdsOffsetBias"] + epilogueSize)
+    ldsNumBytes = max(ldsNumBytes, state["LdsOffsetBias"] + epilogueSize, tdmStoreBytes)
 
     state["LdsBytesNoAmax"] = ldsNumBytes
     if state["ProblemType"]["OutputAmaxD"]:
